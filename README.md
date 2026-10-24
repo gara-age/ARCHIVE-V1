@@ -1,3 +1,5 @@
+> 실사 스타일 재질·조명 업데이트: [GRAPHICS.md](./GRAPHICS.md).
+
 > 콘텐츠 확장 반영: 10개 정보 구간, 학기 성적, 학과 활동, 업무 스타일·주변 평가, 취미·가치관. 상세 구현과 추가 자료 입력 방법은 [CONTENT_EXTENSION.md](./CONTENT_EXTENSION.md)를 참고하세요.
 
 # ARCHIVE V1 · Phase 2 + 가독성·성과 강조 개편
@@ -113,3 +115,17 @@ Phase 3: 가구·재질·베이크 조명 고도화, 실제 기기 성능 측정
 Phase 4 후속: 프로젝트별 담당 역할·기술·성과·추가 스크린샷·음성 자막, 추가 수상·자격 이미지, 자기소개 영상을 실제 자료로 연결. Navi·복지나루의 대회 시연 및 선정된 활동·수상 사진은 연결 완료.
 
 Phase 5: 모바일 실기기, Safari/Firefox, 접근성·성능 검수 및 배포. 이번 작업에서는 온라인 배포를 수행하지 않습니다.
+
+### 나레이션
+
+사용자가 녹음한 11개 소개 음성은 `public/media/narration`에 포함됩니다. 영역 도착 및 작품 탭 선택 시 처음부터 재생하며, 동영상과 동시에 재생하지 않습니다. 첫 방문은 로딩 완료 후 ‘작업실 들어가기’를 눌러 시작하며, 클릭과 함께 studio 음성을 재생합니다. 입장 전에는 음성 재생과 구간 이동을 막습니다. 음성 버튼은 효과음 설정과 별개이며 일반·전체화면 툴바에서 사용할 수 있습니다. 처리 기록은 `docs/narration-processing.json`, 로컬 보정 코드는 `scripts/process-narration.py`에 있습니다.
+
+### 3D 자동 복구
+
+WebGL 연결 손실이나 3D 초기화 오류가 생기면 현재 구간을 유지하고 3D 캔버스를 자동으로 다시 만듭니다. 연속 오류는 최대 두 번 재시도하며, 복구한 세션에서는 해상도 비율을 1로 낮춰 GPU 부담을 줄입니다. 복구 중에는 음성과 이동을 멈추고 준비 후 다시 이어갑니다. 재시도까지 실패하면 HTML 이력서로 전환합니다.
+
+### GitHub Pages 배포
+
+외부 접속 주소: https://gara-age.github.io/ARCHIVE-V1/
+
+main 푸시 시 `.github/workflows/pages.yml`이 Node.js 24에서 `npm ci` → `npm test` → Pages 경로로 빌드 → 배포를 진행합니다. 이미지·영상·나레이션·3D 텍스처는 `assetUrl`로 배포 경로를 반영합니다. 로컬 개발은 기존대로 `npm ci`, `npm run dev`를 사용합니다. Pages와 같은 경로를 로컬에서 확인하려면 `VITE_BASE_PATH=/ARCHIVE-V1/ npm run build` 후 같은 환경변수로 `npm run preview`를 실행하고 `/ARCHIVE-V1/`에 접속합니다.

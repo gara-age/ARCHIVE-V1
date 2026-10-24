@@ -1,0 +1,34 @@
+[
+  {
+    "id": "culinary-class",
+    "source": "서울항공비즈니스고_조리괴.JPG",
+    "file": "culinary-class.jpg",
+    "width": 768,
+    "height": 576,
+    "bytes": 109273
+  },
+  {
+    "id": "bakery-name-tag",
+    "source": "안스베이커리_네임택.jpg",
+    "file": "bakery-name-tag.jpg",
+    "width": 768,
+    "height": 768,
+    "bytes": 68877
+  },
+  {
+    "id": "childhood-memory",
+    "source": "어린시절2.JPG",
+    "file": "childhood-memory.jpg",
+    "width": 576,
+    "height": 768,
+    "bytes": 121532
+  },
+  {
+    "id": "childhood-portrait",
+    "source": "어린시절1.JPG",
+    "file": "childhood-portrait.jpg",
+    "width": 480,
+    "height": 768,
+    "bytes": 129394
+  }
+]

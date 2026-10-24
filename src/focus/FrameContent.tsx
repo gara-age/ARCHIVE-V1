@@ -1,3 +1,4 @@
+import { NarrationControls } from "../components/NarrationPlayer";
 import { useEffect, useRef } from "react";
 import { useTourStore } from "../navigation/useTourStore";
 import { sectionContent } from "../sections/ArchiveSections";
@@ -9,7 +10,6 @@ export default function FrameContent() {
   const section = sections[index];
   const scrollAreas = useRef<Record<string, HTMLDivElement | null>>({});
   const previousIndex = useRef(index);
-  const rect = useTourStore((s) => s.rect);
   const expanded = mode === "EXPANDED";
   const visible = expanded || mode === "FOCUSED";
   const container = useRef<HTMLDivElement>(null);
@@ -67,23 +67,14 @@ export default function FrameContent() {
         aria-modal={expanded || undefined}
         aria-label={`${section.title} 아카이브`}
         tabIndex={-1}
-        className={`frame-content ${visible ? "visible" : ""} ${expanded ? "expanded" : ""} ${focusSurfaces[section.id]?.kind === "frame" ? "gallery-frame" : ""}`}
-        style={
-          expanded
-            ? undefined
-            : {
-                left: rect.left,
-                top: rect.top,
-                width: rect.width,
-                height: rect.height,
-              }
-        }
+        className={`frame-content ${visible ? "visible" : ""} ${expanded ? "expanded" : "reader-default"} ${focusSurfaces[section.id]?.kind === "frame" ? "gallery-frame" : ""}`}
         inert={!visible}
       >
         <div className="monitor-toolbar">
           <span>
             <i /> {section.number} / {section.title}
           </span>
+          <NarrationControls />
           {expanded ? (
             <button
               ref={closeButton}
@@ -98,7 +89,7 @@ export default function FrameContent() {
               onClick={() => useTourStore.getState().expand()}
               aria-label="콘텐츠 확대"
             >
-              넓게 읽기 <span>↗</span>
+              전체화면 <span>↗</span>
             </button>
           )}
         </div>

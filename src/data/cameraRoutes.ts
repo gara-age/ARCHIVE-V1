@@ -7,11 +7,20 @@ export type FocusSurface = {
   kind: "monitor" | "frame";
 };
 export const monitor: FocusSurface = {
-  center: [-0.65, 2.05, -3.72],
+  center: [-0.65, 2.55, -3.72],
   width: 3.3,
   height: 1.86,
   rotation: 0,
   kind: "monitor",
+};
+// Hardware uses the same display surface as camera focus, with a recessed screen and rear-mounted stand.
+export const monitorHardware = {
+  desktopTop: 1.21,
+  base: { position: [-0.65, 1.25, -3.85] as Vec3, size: [0.76, 0.08, 0.58] as Vec3 },
+  neck: { position: [-0.65, 1.53, -3.96] as Vec3, size: [0.14, 0.48, 0.12] as Vec3 },
+  mount: { position: [-0.65, 1.72, -3.89] as Vec3, size: [0.3, 0.24, 0.1] as Vec3 },
+  shell: { position: [-0.65, 2.51, -3.8] as Vec3, size: [3.5, 2.14, 0.15] as Vec3 },
+  lowerBezel: { position: [-0.65, 1.53, -3.7] as Vec3, size: [3.5, 0.18, 0.045] as Vec3 },
 };
 export const focusSurfaces: Record<string, FocusSurface> = {
   works: monitor,

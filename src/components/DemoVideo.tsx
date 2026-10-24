@@ -1,3 +1,4 @@
+import { assetUrl } from "../utils/assetUrl";
 import { useEffect, useRef, useState } from "react";
 import type { Demo } from "../data/demos";
 import { useTourStore } from "../navigation/useTourStore";
@@ -12,7 +13,7 @@ export default function DemoVideo({ demo }: { demo: Demo }) {
     };
     let index = useTourStore.getState().sectionIndex;
     const unsubscribe = useTourStore.subscribe((state) => {
-      if (state.sectionIndex !== index || state.viewMode === "FLYING") {
+      if (!state.ready || state.sectionIndex !== index || state.viewMode === "FLYING") {
         stop();
         index = state.sectionIndex;
       }
@@ -31,7 +32,7 @@ export default function DemoVideo({ demo }: { demo: Demo }) {
         controls
         playsInline
         preload="none"
-        poster={demo.poster}
+        poster={assetUrl(demo.poster)}
         aria-label={`${demo.projectName} — ${demo.competition} 시연 영상`}
         onError={() => setFailed(true)}
         onPlay={(event) => {
@@ -41,7 +42,7 @@ export default function DemoVideo({ demo }: { demo: Demo }) {
           playingVideos.add(current);
         }}
       >
-        <source src={demo.src} type="video/mp4" />
+        <source src={assetUrl(demo.src)} type="video/mp4" />
         {demo.captions && (
           <track
             kind="captions"
@@ -60,7 +61,7 @@ export default function DemoVideo({ demo }: { demo: Demo }) {
       {failed && (
         <p role="alert" className="media-error">
           영상을 불러오지 못했습니다.{" "}
-          <a href={demo.src} target="_blank" rel="noreferrer">
+          <a href={assetUrl(demo.src)} target="_blank" rel="noreferrer">
             영상 파일 열기 ↗
           </a>
         </p>

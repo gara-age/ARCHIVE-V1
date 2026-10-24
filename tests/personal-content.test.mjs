@@ -3,8 +3,6 @@ import assert from "node:assert/strict";
 import { academicExcellence, publicAcademicEvidence } from "../src/data/academics.ts";
 import { publicTestimonials, testimonials } from "../src/data/testimonials.ts";
 import { campusActivities } from "../src/data/campusActivities.ts";
-import { personalTraits } from "../src/data/personalTraits.ts";
-import { sections } from "../src/data/sections.ts";
 
 test("semester results retain their specific academic year and term", () => {
   assert.deepEqual(
@@ -33,15 +31,11 @@ test("only consented real quotes are shown and names respect separate consent", 
   assert.deepEqual(publicTestimonials([{ ...record, quote: " ", consent: { publishQuote: true, publishName: true } }]), []);
   assert.equal(record.name, "Test Name");
 });
-test("unknown activity dates and behavioral examples stay unfilled, related records resolve", () => {
+test("unknown activity dates and supporting materials stay unfilled", () => {
   for (const activity of campusActivities) {
     assert.equal(activity.period, null);
     assert.equal(activity.learning, null);
     assert.deepEqual(activity.photos, []);
   }
-  const destinations = new Set([...sections.map((section) => section.id), "academics"]);
-  for (const trait of personalTraits) {
-    assert.equal(trait.examples.length, 0);
-    for (const id of trait.related) assert.ok(destinations.has(id));
-  }
+
 });

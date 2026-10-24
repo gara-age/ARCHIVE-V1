@@ -1,6 +1,9 @@
-import { Canvas } from "@react-three/fiber";
-import { Component, type ReactNode } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { Component, Suspense, useEffect, type ReactNode } from "react";
+import { ACESFilmicToneMapping, PCFSoftShadowMap, SRGBColorSpace } from "three";
 import Workspace from "./Workspace";
+import SceneWarmup from "./SceneWarmup";
+import FrameDiagnostics from "./FrameDiagnostics";
 import CinematicCamera from "./CinematicCamera";
 class CanvasBoundary extends Component<
   { children: ReactNode; onFailure: () => void },
@@ -17,12 +20,26 @@ class CanvasBoundary extends Component<
     return this.state.failed ? null : this.props.children;
   }
 }
+function ContextRecovery({ onFailure }: { onFailure: () => void }) {
+  const canvas = useThree((s) => s.gl.domElement);
+  useEffect(() => {
+    const lost = (event: Event) => {
+      event.preventDefault();
+      onFailure();
+    };
+    canvas.addEventListener("webglcontextlost", lost);
+    return () => canvas.removeEventListener("webglcontextlost", lost);
+  }, [canvas, onFailure]);
+  return null;
+}
 export default function ExperienceCanvas({
   focused,
-  onFailure,
+  onFailure, onReady, reducedQuality = false,
 }: {
   focused: boolean;
   onFailure: () => void;
+  onReady: () => void;
+  reducedQuality?: boolean;
 }) {
   return (
     <div
@@ -32,17 +49,23 @@ export default function ExperienceCanvas({
       <CanvasBoundary onFailure={onFailure}>
         <Canvas
           shadows
-          dpr={[1, 1.6]}
+          dpr={reducedQuality ? 1 : [1, 1.5]}
           camera={{ fov: 45, near: 0.08, far: 40 }}
           gl={{ antialias: true, powerPreference: "high-performance" }}
           onCreated={({ gl }) => {
-            gl.domElement.addEventListener("webglcontextlost", onFailure, {
-              once: true,
-            });
+            gl.toneMapping = ACESFilmicToneMapping;
+            gl.toneMappingExposure = 1.05;
+            gl.outputColorSpace = SRGBColorSpace;
+            gl.shadowMap.type = PCFSoftShadowMap;
           }}
         >
-          <Workspace />
-          <CinematicCamera />
+          <ContextRecovery onFailure={onFailure} />
+          <Suspense fallback={null}>
+            <Workspace />
+            <CinematicCamera />
+            <FrameDiagnostics />
+            <SceneWarmup onReady={onReady} onFailure={onFailure} />
+          </Suspense>
         </Canvas>
       </CanvasBoundary>
     </div>

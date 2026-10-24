@@ -39,3 +39,9 @@ export function interiorPath(start, end, waypoint) {
     "centripetal",
   );
 }
+
+// Minimum-jerk easing has zero velocity and acceleration at both ends.
+export function flightEase(t) {
+  const x = Math.max(0, Math.min(1, t));
+  return x * x * x * (x * (x * 6 - 15) + 10);
+}

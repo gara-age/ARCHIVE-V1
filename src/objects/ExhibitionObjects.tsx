@@ -1,5 +1,8 @@
 import { useMemo } from "react";
 import * as THREE from "three";
+import { createTrophyBowl, trophyHandleCurve } from "./detailGeometry";
+import { useStudioMaterials } from "./StudioMaterials";
+import { DetailedAirplane, DetailedBakingObjects } from "./PersonalProps";
 import { Box } from "./StudioObjects";
 import { focusSurfaces, type FocusSurface } from "../data/cameraRoutes";
 function ExhibitFrame({
@@ -55,94 +58,22 @@ function ExhibitFrame({
   );
 }
 function Trophy({ position }: { position: [number, number, number] }) {
+  const { metalBump, stoneMap } = useStudioMaterials();
+  const bowl = useMemo(createTrophyBowl, []);
+  const handles = useMemo(() => [-1, 1].map((side) => new THREE.TubeGeometry(trophyHandleCurve(side), 40, 0.014, 10, false)), []);
+  const gold = useMemo(() => new THREE.MeshStandardMaterial({ color: "#d6aa50", metalness: 0.94, roughness: 0.24, bumpMap: metalBump, bumpScale: 0.0012, envMapIntensity: 1.2 }), [metalBump]);
   return (
     <group position={position}>
-      <Box position={[0, 0.07, 0]} size={[0.34, 0.14, 0.3]} color="#464c40" />
-      <mesh position={[0, 0.27, 0]}>
-        <cylinderGeometry args={[0.04, 0.08, 0.28, 16]} />
-        <meshStandardMaterial
-          color="#ba9160"
-          metalness={0.65}
-          roughness={0.35}
-        />
+      <mesh position={[0, 0.07, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.34, 0.14, 0.3]} /><meshPhysicalMaterial map={stoneMap} color="#41443b" roughness={0.22} clearcoat={0.35} />
       </mesh>
-      <mesh position={[0, 0.52, 0]}>
-        <cylinderGeometry args={[0.22, 0.07, 0.3, 24]} />
-        <meshStandardMaterial
-          color="#c8a575"
-          metalness={0.55}
-          roughness={0.35}
-        />
-      </mesh>
-      {[-1, 1].map((i) => (
-        <mesh key={i} position={[i * 0.22, 0.52, 0]} rotation={[0, 0, i * 0.4]}>
-          <torusGeometry args={[0.13, 0.025, 8, 20, Math.PI * 1.8]} />
-          <meshStandardMaterial
-            color="#ba9160"
-            metalness={0.55}
-            roughness={0.4}
-          />
-        </mesh>
-      ))}
+      <mesh position={[0, 0.245, 0]} material={gold} castShadow><cylinderGeometry args={[0.034, 0.073, 0.21, 48]} /></mesh>
+      <mesh geometry={bowl} material={gold} castShadow receiveShadow />
+      {handles.map((geometry, index) => <mesh key={index} geometry={geometry} material={gold} castShadow />)}
     </group>
   );
 }
-function Airplane() {
-  return (
-    <group position={[-2.1, 1.63, 5.05]} rotation={[0, -0.25, 0]}>
-      <mesh rotation={[0, 0, Math.PI / 2]}>
-        <capsuleGeometry args={[0.075, 0.95, 8, 16]} />
-        <meshStandardMaterial color="#dfdfcf" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <Box
-        position={[0, 0, 0]}
-        size={[0.42, 0.035, 1.15]}
-        color="#d3d8c7"
-        rotation={[0, 0.15, 0]}
-      />
-      <Box
-        position={[-0.47, 0.12, 0]}
-        size={[0.22, 0.25, 0.035]}
-        color="#798a71"
-      />
-      <Box
-        position={[-0.43, 0.03, 0]}
-        size={[0.22, 0.03, 0.45]}
-        color="#798a71"
-      />
-      <Box position={[0, -0.16, 0]} size={[0.05, 0.25, 0.06]} color="#777866" />
-      <Box position={[0, -0.31, 0]} size={[0.48, 0.06, 0.35]} color="#4c5145" />
-    </group>
-  );
-}
-function BakingObjects() {
-  return (
-    <group position={[-3.45, 1.45, 5.1]}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.25, 0.25, 0.03, 32]} />
-        <meshStandardMaterial color="#ece4ce" />
-      </mesh>
-      {[-0.1, 0.1].map((x, i) => (
-        <mesh
-          key={i}
-          position={[x, 0.06, 0]}
-          rotation={[0, 0, 0.18]}
-          scale={[0.13, 0.08, 0.17]}
-        >
-          <sphereGeometry args={[1, 16, 12]} />
-          <meshStandardMaterial
-            color={i ? "#ba824c" : "#c9975b"}
-            roughness={0.95}
-          />
-        </mesh>
-      ))}
-      <mesh position={[0.5, 0.04, 0.05]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.04, 0.04, 0.6, 16]} />
-        <meshStandardMaterial color="#b08760" />
-      </mesh>
-    </group>
-  );
-}
+
 export default function ExhibitionObjects() {
   return (
     <group>
@@ -246,8 +177,8 @@ export default function ExhibitionObjects() {
           color="#626b58"
         />
       ))}
-      <Airplane />
-      <BakingObjects />
+      <DetailedAirplane />
+      <DetailedBakingObjects />
     </group>
   );
 }

@@ -51,3 +51,24 @@ test("selected photographs have complete previews and full-size web images", () 
     assert.ok(photo.caption.length > 5);
   }
 });
+
+test("PBR materials and HDR lighting ship locally with complete source records", () => {
+  const root = resolve("public/media/materials");
+  const sources = JSON.parse(readFileSync(resolve(root, "sources.json"), "utf8"));
+  assert.equal(sources.length, 5);
+  for (const source of sources) {
+    assert.equal(source.license, "CC0");
+    assert.ok(source.source.startsWith("https://polyhaven.com/a/"));
+    if (source.asset !== "studio_small_09") {
+      for (const kind of ["diffuse", "nor_gl", "roughness"]) {
+        assert.ok(source.files.some((file) => file.file === `${source.asset}-${kind}.jpg`));
+      }
+    }
+    for (const file of source.files) {
+      const bytes = readFileSync(resolve(root, file.file));
+      assert.equal(bytes.length, file.bytes);
+      if (file.file.endsWith(".jpg")) assert.equal(bytes.readUInt16BE(0), 0xffd8);
+      else assert.ok(bytes.toString("ascii", 0, 64).includes("RADIANCE"));
+    }
+  }
+});

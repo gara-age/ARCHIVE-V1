@@ -6,6 +6,7 @@ export default function Navigation() {
   const [open, setOpen] = useState(false);
   const locked = s.isTransitioning || s.viewMode === "EXPANDED" || !s.ready;
   const current = sections[s.sectionIndex];
+  const readerControls = !!current.objectId;
   useEffect(() => {
     if (s.viewMode === "EXPANDED") setOpen(false);
   }, [s.viewMode]);
@@ -20,7 +21,7 @@ export default function Navigation() {
   return (
     <>
       <button
-        className="contents-toggle"
+        className={`contents-toggle ${readerControls ? "reader-navigation" : ""}`}
         aria-expanded={open}
         aria-controls="scene-menu"
         onClick={() => setOpen(!open)}
@@ -29,7 +30,7 @@ export default function Navigation() {
       </button>
       <nav
         id="scene-menu"
-        className={`scene-nav ${open ? "menu-open" : ""}`}
+        className={`scene-nav ${open ? "menu-open" : ""} ${readerControls ? "reader-menu" : ""}`}
         aria-label="구간 목차"
       >
         {sections.map((section, i) => (

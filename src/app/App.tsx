@@ -1,71 +1,57 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 const ExperienceCanvas = lazy(() => import("../experience/ExperienceCanvas"));
 import { sections } from "../data/sections";
 import { Contact } from "../sections/ArchiveSections";
 import FrameContent from "../focus/FrameContent";
 import TourController from "../navigation/TourController";
 import Navigation from "../components/Navigation";
+import NarrationPlayer, { NarrationControls } from "../components/NarrationPlayer";
 import SoundToggle from "../components/SoundToggle";
 import FallbackResume from "../components/FallbackResume";
+import { useNarrationStore } from "../media/useNarrationStore";
+import { SceneRecovery, type SceneStatus } from "../experience/sceneRecovery";
 import { useTourStore } from "../navigation/useTourStore";
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    const gl = canvas.getContext("webgl2");
-    if (gl) {
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
-      return true;
-    }
-    return false;
-  } catch {
-    return false;
-  }
-}
 export default function App() {
-  const [supported] = useState(supportsWebGL);
-  const [failed, setFailed] = useState(false);
-  const [fallback, setFallback] = useState(!supported);
+  const [scene, setScene] = useState<SceneStatus>({ phase: "loading", generation: 0, attempt: 0 });
+  const [recovery] = useState(() => new SceneRecovery(setScene));
+  const [fallback, setFallback] = useState(false);
+  const failed = scene.phase === "failed";
+  const showFallback = fallback || failed;
+  useEffect(() => { recovery.start(); return () => recovery.dispose(); }, [recovery]);
   const s = useTourStore();
-  const [extraLarge, setExtraLarge] = useState(() => {
-    try {
-      return localStorage.getItem("archive-reading-size") === "extra";
-    } catch {
-      return false;
-    }
-  });
+  const entered = useNarrationStore((state) => state.entered);
+  const openingButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    document.documentElement.dataset.readingSize = extraLarge
-      ? "extra"
-      : "large";
-    try {
-      localStorage.setItem(
-        "archive-reading-size",
-        extraLarge ? "extra" : "large",
-      );
-    } catch {}
-  }, [extraLarge]);
+    if (entered) openingButton.current?.focus({ preventScroll: true });
+  }, [entered]);
   const expanded = s.viewMode === "EXPANDED";
   const focused = s.viewMode === "FOCUSED" || expanded;
   return (
     <>
-      {!failed && supported && (
+      <NarrationPlayer suspended={showFallback} />
+      {!failed && scene.phase !== "retrying" && (
         <Suspense fallback={null}>
           <ExperienceCanvas
+            key={scene.generation}
             focused={focused}
+            reducedQuality={scene.generation > 0}
+            onReady={() => {
+              if (recovery.ready(scene.generation)) useTourStore.getState().setReady();
+            }}
             onFailure={() => {
-              setFailed(true);
-              setFallback(true);
+              if (recovery.fail(scene.generation)) useTourStore.getState().reloadScene();
             }}
           />
         </Suspense>
       )}
-      {fallback ? (
+      {showFallback ? (
         <FallbackResume
-          onClose={supported && !failed ? () => setFallback(false) : undefined}
+          onClose={!failed ? () => setFallback(false) : undefined}
         />
       ) : (
         <>
-          <TourController />
+          {entered && s.ready && <TourController />}
+          <div inert={!entered || !s.ready}>
           <header className="site-header" inert={expanded}>
             <a
               className="wordmark"
@@ -83,19 +69,7 @@ export default function App() {
               INTERACTIVE ARCHIVE
             </span>
             <div className="header-actions">
-              <button
-                className="reading-toggle"
-                aria-pressed={extraLarge}
-                aria-label={
-                  extraLarge ? "기본 큰 글씨로 보기" : "글씨를 더 크게 보기"
-                }
-                onClick={() => setExtraLarge(!extraLarge)}
-              >
-                <span aria-hidden="true">가{extraLarge ? "−" : "+"}</span>
-                <span className="reading-label">
-                  {extraLarge ? "기본 큰 글씨" : "더 큰 글씨"}
-                </span>
-              </button>
+              {!focused && <NarrationControls />}
               <SoundToggle />
               <button
                 onClick={() => setFallback(true)}
@@ -119,7 +93,7 @@ export default function App() {
               <p className="opening-description">
                 최민서의 작업과 배움을 담은 공간.
               </p>
-              <button className="explore-button" onClick={() => s.navigate(1)}>
+              <button ref={openingButton} className="explore-button" onClick={() => s.navigate(1)}>
                 작업실 둘러보기 <span>↗</span>
               </button>
             </div>
@@ -153,10 +127,16 @@ export default function App() {
               IN TRANSIT <span>···</span>
             </div>
           )}
-          {!s.ready && (
-            <div className="loading-screen">
+          </div>
+          {(!entered || !s.ready) && (
+            <div className="loading-screen" role="dialog" aria-modal="true" aria-label="작업실 입장" data-content>
               <span className="wordmark">ARCHIVE V1</span>
-              <p>작업실의 불을 켜는 중</p>
+              {s.ready ? (
+                <button className="explore-button studio-enter" autoFocus
+                  onClick={() => useNarrationStore.getState().enterStudio()}>
+                  작업실 들어가기 <span aria-hidden="true">↗</span>
+                </button>
+              ) : <p role="status">{scene.attempt > 0 ? "작업실을 다시 불러오는 중" : "작업실의 불을 켜는 중"}</p>}
             </div>
           )}
         </>

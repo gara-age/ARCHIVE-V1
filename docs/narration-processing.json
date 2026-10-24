@@ -1,0 +1,123 @@
+[
+  {
+    "source": "00_studio.m4a",
+    "output": "00-studio.m4a",
+    "sha256": "bbd98fbb0003e6fd90d8b3b3873ecae4265dc5512993aee5710f6ca05d588b69",
+    "duration": 24.2,
+    "sampleRate": 48000,
+    "peakBeforeDb": -3.58,
+    "peakAfterDb": -4.6,
+    "gainDb": -0.78,
+    "quietWindowChangeDb": -12.99
+  },
+  {
+    "source": "01_bokji.m4a",
+    "output": "01-bokji.m4a",
+    "sha256": "a938419ffeb64f85a32f5d23670f56bbed43710f17472032a8dcc1dd64eb6ef3",
+    "duration": 82.4,
+    "sampleRate": 48000,
+    "peakBeforeDb": -2.62,
+    "peakAfterDb": -4.64,
+    "gainDb": -1.72,
+    "quietWindowChangeDb": -12.72
+  },
+  {
+    "source": "01_navi.m4a",
+    "output": "01-navi.m4a",
+    "sha256": "91f36c31151fe904166d54a79d205c238e0042e50b942fa7266344ff13b33fc7",
+    "duration": 83.0,
+    "sampleRate": 48000,
+    "peakBeforeDb": -3.49,
+    "peakAfterDb": -5.82,
+    "gainDb": -2.13,
+    "quietWindowChangeDb": -13.57
+  },
+  {
+    "source": "02_archievements.m4a",
+    "output": "02-achievements.m4a",
+    "sha256": "2e99d99a75c7314c5f72726637d2092d223cdf89b1be1377d58585a3859ed4be",
+    "duration": 58.3,
+    "sampleRate": 48000,
+    "peakBeforeDb": -4.65,
+    "peakAfterDb": -7.2,
+    "gainDb": -2.47,
+    "quietWindowChangeDb": -13.83
+  },
+  {
+    "source": "03_certifications.m4a",
+    "output": "03-certifications.m4a",
+    "sha256": "f19dc639b27bb990d17e0bae7b1e6804dead9c73209e67d40c3a246b9681a04b",
+    "duration": 37.5,
+    "sampleRate": 48000,
+    "peakBeforeDb": -3.6,
+    "peakAfterDb": -7.93,
+    "gainDb": -3.99,
+    "quietWindowChangeDb": -15.15
+  },
+  {
+    "source": "04_experience.m4a",
+    "output": "04-experience.m4a",
+    "sha256": "29d0fa0f54ca112e27c872d19211c8951977e8bcd173ab36e1a633ceb3ddfed6",
+    "duration": 43.3,
+    "sampleRate": 48000,
+    "peakBeforeDb": -3.07,
+    "peakAfterDb": -7.23,
+    "gainDb": -3.72,
+    "quietWindowChangeDb": -15.6
+  },
+  {
+    "source": "05_campus.m4a",
+    "output": "05-campus.m4a",
+    "sha256": "aae67aa0d5146052d42fd98e20ead4421d95e1db97fbe3147946bdd392a1820d",
+    "duration": 34.8,
+    "sampleRate": 48000,
+    "peakBeforeDb": -1.95,
+    "peakAfterDb": -6.4,
+    "gainDb": -4.39,
+    "quietWindowChangeDb": -16.47
+  },
+  {
+    "source": "06_howiwork.m4a",
+    "output": "06-how-i-work.m4a",
+    "sha256": "7ca1b17b74c6edf70159302d76681c5f870f8d1d04458a0924eec659d04f3d4b",
+    "duration": 57.5,
+    "sampleRate": 48000,
+    "peakBeforeDb": -1.56,
+    "peakAfterDb": -6.02,
+    "gainDb": -4.34,
+    "quietWindowChangeDb": -15.61
+  },
+  {
+    "source": "07_mystory.m4a",
+    "output": "07-my-story.m4a",
+    "sha256": "1b580cbab25a96e348e0e76b328a84c8d40be3117e70b8edf76d32781f1a112e",
+    "duration": 51.8,
+    "sampleRate": 48000,
+    "peakBeforeDb": -2.98,
+    "peakAfterDb": -6.65,
+    "gainDb": -3.36,
+    "quietWindowChangeDb": -15.3
+  },
+  {
+    "source": "08_beyond.m4a",
+    "output": "08-beyond.m4a",
+    "sha256": "a13dd275605b95aee7088293abe075a01bee51205656f14420d38db5d3fd9f11",
+    "duration": 34.8,
+    "sampleRate": 48000,
+    "peakBeforeDb": -3.32,
+    "peakAfterDb": -6.96,
+    "gainDb": -3.44,
+    "quietWindowChangeDb": -15.48
+  },
+  {
+    "source": "09_contact.m4a",
+    "output": "09-contact.m4a",
+    "sha256": "e6e3f8265957f3d8cdbacdb7135c6a724565b5a86b018c59346796f5aa628bff",
+    "duration": 11.9,
+    "sampleRate": 48000,
+    "peakBeforeDb": -6.12,
+    "peakAfterDb": -7.64,
+    "gainDb": -1.23,
+    "quietWindowChangeDb": -13.16
+  }
+]

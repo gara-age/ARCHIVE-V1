@@ -1,10 +1,11 @@
+import { assetUrl } from "../utils/assetUrl";
 import { useTexture } from "@react-three/drei";
 import { DoubleSide, SRGBColorSpace } from "three";
 import { Box } from "./StudioObjects";
 
 // Original alpha defines a character-shaped tabletop stand, with no easel or rectangular backing.
 export default function NaruStand() {
-  const texture = useTexture("/media/characters/naru.png");
+  const texture = useTexture(assetUrl("/media/characters/naru.png"));
   texture.colorSpace = SRGBColorSpace;
   return (
     <group position={[1.52, 1.21, -2.85]} rotation={[0, 0.32, 0]}>

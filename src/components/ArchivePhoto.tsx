@@ -1,3 +1,4 @@
+import { assetUrl } from "../utils/assetUrl";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { ArchivePhoto as Photo } from "../data/photos";
@@ -46,7 +47,7 @@ function PhotoViewer({
         </div>
       </header>
       <div className="photo-viewport">
-        <img src={photo.full} alt={photo.alt} />
+        <img src={assetUrl(photo.full)} alt={photo.alt} />
       </div>
     </dialog>,
     document.body,
@@ -62,7 +63,7 @@ export default function ArchivePhoto({ photo }: { photo: Photo }) {
         aria-label={`${photo.caption} 크게 보기`}
       >
         <img
-          src={photo.src}
+          src={assetUrl(photo.src)}
           width={photo.width}
           height={photo.height}
           alt={photo.alt}

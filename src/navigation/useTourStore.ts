@@ -15,6 +15,7 @@ type State = {
   expand: () => void;
   collapse: () => void;
   setReady: () => void;
+  reloadScene: () => void;
   setRect: (rect: State["rect"]) => void;
 };
 export const useTourStore = create<State>((set, get) => ({
@@ -62,5 +63,10 @@ export const useTourStore = create<State>((set, get) => ({
       });
   },
   setReady: () => set({ ready: true }),
+  reloadScene: () => set((s) => ({
+    ready: false, isTransitioning: false, lockedUntil: 0,
+    viewMode: s.viewMode === "EXPANDED" ? "EXPANDED" : sections[s.sectionIndex].objectId ? "FOCUSED" : "WORKSPACE",
+    activeObjectId: sections[s.sectionIndex].objectId,
+  })),
   setRect: (rect) => set({ rect }),
 }));

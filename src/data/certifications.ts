@@ -57,6 +57,6 @@ export const academicRecords = [
     title: "AI융합소프트웨어",
     institution: "한국폴리텍2대학(인천캠퍼스)",
     period: "2025.03 ~",
-    detail: "2·3년제 · 재학 중",
+    detail: "2년제 · 재학 중",
   },
 ];

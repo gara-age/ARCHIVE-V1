@@ -1,5 +1,10 @@
-import { Suspense } from "react";
+import { assetUrl } from "../utils/assetUrl";
+import { memo, Suspense } from "react";
+import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
+import { Environment, ContactShadows, BakeShadows } from "@react-three/drei";
+import { StudioMaterials } from "../objects/StudioMaterials";
 import NaruStand from "../objects/NaruStand";
+import MemoryFrames from "../objects/MemoryFrames";
 import ExhibitionObjects from "../objects/ExhibitionObjects";
 import {
   Box,
@@ -9,25 +14,33 @@ import {
   Floor,
   LeafPlant,
 } from "../objects/StudioObjects";
-export default function Workspace() {
+RectAreaLightUniformsLib.init();
+import { plantPlacements } from "../data/studioLayout";
+function Workspace() {
   return (
-    <group>
+    <StudioMaterials><group>
       <color attach="background" args={["#e8deca"]} />
-      <ambientLight intensity={0.9} />
-      <hemisphereLight args={["#fff3dc", "#7b7968", 1.3]} />
+      <Environment files={assetUrl("/media/materials/studio_small_09-hdri.hdr")} environmentIntensity={0.45} environmentRotation={[0, 0.6, 0]} />
+      <ambientLight intensity={0.12} />
+      <hemisphereLight args={["#e7efff", "#776249", 0.32]} />
+      <rectAreaLight position={[-5.5, 2.7, -1.4]} rotation={[0, -Math.PI / 2, 0]} width={3} height={2.6} intensity={3.4} color="#e8f0ff" />
       <directionalLight
-        position={[-4, 4, 1]}
+        position={[-5, 4.1, -0.5]}
         intensity={3}
-        color="#ffedcf"
+        color="#fff0db"
         castShadow
         shadow-mapSize={[2048, 2048]}
         shadow-camera-left={-7}
         shadow-camera-right={7}
         shadow-camera-top={7}
         shadow-camera-bottom={-7}
-        shadow-bias={-0.0005}
+        shadow-bias={-0.00015}
+        shadow-normalBias={0.025}
+        shadow-radius={4}
       />
+      <BakeShadows />
       <Floor />
+      <ContactShadows position={[0, 0.036, 0]} scale={12} opacity={0.38} blur={2.2} far={4.5} resolution={1024} frames={1} color="#44382b" />
       <Box position={[0, 2.25, -6]} size={[12, 4.5, 0.2]} color="#eee5d4" />
       <Box position={[6, 2.25, 0]} size={[0.2, 4.5, 12]} color="#e7ddca" />
       <Box position={[-6, 2.25, 0]} size={[0.2, 4.5, 12]} color="#f3e8d6" />
@@ -52,6 +65,10 @@ export default function Workspace() {
         size={[0.08, 2.7, 3.1]}
         color="#c5d1cc"
       />
+      <mesh position={[-5.8, 2.65, -1.4]} rotation={[0, Math.PI / 2, 0]}>
+        <planeGeometry args={[3.05, 2.65]} />
+        <meshStandardMaterial color="#cfdfdf" emissive="#dbe9f2" emissiveIntensity={0.65} roughness={0.15} metalness={0.1} />
+      </mesh>
       {[-2.95, -1.4, 0.15].map((z) => (
         <Box
           key={z}
@@ -77,20 +94,22 @@ export default function Workspace() {
       <Suspense fallback={null}><NaruStand /></Suspense>
       <Chair />
       <Bookshelf />
-      <LeafPlant position={[-4.9, 0, 0.4]} />
+      <LeafPlant {...plantPlacements.floor} />
       <Box
         position={[-0.6, 0.018, -1.5]}
         size={[5.8, 0.025, 3.8]}
-        color="#a6aa94"
+        color="#d0c5af"
+        finish="fabric"
       />
       <ExhibitionObjects />
+      <MemoryFrames />
       <Box position={[3.1, 1.42, -5.55]} size={[2.8, 0.08, 0.55]} />
       <Box
         position={[4.7, 1.25, -5.35]}
         size={[0.95, 2.5, 0.95]}
         color="#ad9270"
       />
-      <LeafPlant position={[4.7, 2.52, -5.35]} />
+      <LeafPlant {...plantPlacements.cabinet} />
       {/* Closed interior door, relocated clear of the exhibit wall. */}
       <Box
         position={[5.82, 1.23, 3.8]}
@@ -124,7 +143,9 @@ export default function Workspace() {
         <coneGeometry args={[0.44, 0.28, 32, 1, true]} />
         <meshStandardMaterial color="#6c765e" side={2} />
       </mesh>
-      <pointLight position={[-0.8, 3.4, -2.8]} color="#ffdbab" intensity={4} />
-    </group>
+      <pointLight position={[-0.8, 3.4, -2.8]} color="#ffdbab" intensity={5} distance={7} decay={2} />
+    </group></StudioMaterials>
   );
 }
+
+export default memo(Workspace);

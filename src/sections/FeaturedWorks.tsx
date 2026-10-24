@@ -1,4 +1,6 @@
-import { useId, useState } from "react";
+import { useNarrationStore } from "../media/useNarrationStore";
+import { useEffect, useId, useState } from "react";
+import { projectStories } from "../data/projectStories";
 import { projects } from "../data/projects";
 import { demos } from "../data/demos";
 import ArchivePhoto from "../components/ArchivePhoto";
@@ -8,6 +10,8 @@ export default function FeaturedWorks() {
   const [selected, setSelected] = useState(0);
   const instance = useId();
   const project = projects[selected];
+  useEffect(() => { useNarrationStore.setState({ projectId: project.id }); }, [project.id]);
+  const story = projectStories[project.id];
   const demo = demos.find((d) => d.projectId === project.id);
   const activity = photos.find(
     (p) => p.projectId === project.id && p.kind === "activity",
@@ -64,6 +68,7 @@ export default function FeaturedWorks() {
               <h3>{project.name}</h3>
               <span className="award-badge">{demo.award}</span>
             </div>
+            <p className="project-lead">{story.summary}</p>
             {activity && <ArchivePhoto key={activity.id} photo={activity} />}
             <DemoDisclosure key={demo.id} demo={demo} />
           </>
@@ -83,6 +88,13 @@ export default function FeaturedWorks() {
           </div>
         )}
         {!demo && <p className="project-lead">{project.description}</p>}
+        <div className="project-story">
+          {story.sections.map((section) => <section className="project-story-section" key={section.title}>
+            <h4>{section.title}</h4>
+            {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {section.items && <ul>{section.items.map((item) => <li key={item.title}><strong>{item.title}</strong><p>{item.text}</p></li>)}</ul>}
+          </section>)}
+        </div>
       </article>
     </>
   );

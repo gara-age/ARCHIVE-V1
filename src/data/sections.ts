@@ -50,8 +50,8 @@ export const sections = [
   },
   {
     id: "about",
-    label: "About me",
-    title: "자기소개",
+    label: "My story",
+    title: "나의 이야기",
     number: "07",
     objectId: "story-frame",
   },

@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { assetUrl } from "../utils/assetUrl";
 import { achievements } from "../data/achievements";
 import { academicRecords, certifications } from "../data/certifications";
-import { skills, skillTopics } from "../data/skills";
 import { experiences } from "../data/experiences";
-import { aboutTopics, beyondStory, introductionVideo } from "../data/stories";
+import { storyJourney, nextDirection, beyondStory, introductionVideo } from "../data/stories";
 import { contacts, profile } from "../data/profile";
 import { demos } from "../data/demos";
 import ArchivePhoto from "../components/ArchivePhoto";
 import { photos } from "../data/photos";
 import { DemoDisclosure } from "../components/DemoVideo";
 import FeaturedWorks from "./FeaturedWorks";
-import { AcademicExcellence, CampusActivities, HowIWork, HobbiesAndValues, RelatedRecord } from "./PersonalSections";
+import { AcademicExcellence, CampusActivities, HowIWork, HobbiesAndValues } from "./PersonalSections";
 function Intro({
   number,
   title,
@@ -52,12 +51,15 @@ export function Achievements() {
                     {a.date} · {a.competition}
                   </span>
                   <h3>{a.name}</h3>
-                  <p>{a.organizer}</p>
+                  <p>수여 기관 · {a.organizer}</p>
                 </div>
               </div>
               <div className="award-project">
-                <span>수상 관련 작품</span>
+                <span>수상 작품</span>
                 <strong>{a.project}</strong>
+              </div>
+              <div className="award-description">
+                {a.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
               <div className="award-gallery">
                 {photo && <ArchivePhoto photo={photo} />}
@@ -95,7 +97,6 @@ export function Certifications() {
           </article>
         ))}
       </div>
-      <RelatedRecord id="academics" label="학업 성과 · 2026학년도 1학기" />
       <h3 className="subsection-title">
         Education <span>학업 기록</span>
       </h3>
@@ -111,7 +112,6 @@ export function Certifications() {
   );
 }
 export function SkillsExperience() {
-  const [tab, setTab] = useState("경험");
   return (
     <>
       <Intro
@@ -119,14 +119,6 @@ export function SkillsExperience() {
         title="경험 위에 쌓는 기술."
         description="수치 대신 실제 경험과 근거로 연결하는 역량의 기록."
       />
-      <div className="filter-row" role="group" aria-label="기술 및 경험 보기">
-        {["경험", "기술 연결"].map((t) => (
-          <button key={t} aria-pressed={tab === t} onClick={() => setTab(t)}>
-            {t}
-          </button>
-        ))}
-      </div>
-      {tab === "경험" ? (
         <div className="experience-list">
           {experiences.map((e, i) => (
             <article
@@ -149,31 +141,7 @@ export function SkillsExperience() {
             </article>
           ))}
         </div>
-      ) : (
-        <>
-          <p className="placeholder-note">
-            이력서에는 프로젝트별 사용 기술이 기재되어 있지 않습니다. 아래
-            기술은 명세서의 정리 대상이며, 사용 경험이나 숙련도에 대한 주장이
-            아닙니다.
-          </p>
-          <div className="skill-topics">
-            {skillTopics.map((topic) => (
-              <div key={topic}>
-                <strong>{topic}</strong>
-                <span>프로젝트 사용 근거 입력 예정</span>
-              </div>
-            ))}
-          </div>
-          {skills.map((s) => (
-            <article key={s.name}>
-              <h3>{s.name}</h3>
-              <p>
-                {s.project} · {s.usage}
-              </p>
-            </article>
-          ))}
-        </>
-      )}
+
     </>
   );
 }
@@ -181,8 +149,8 @@ export function AboutMe() {
   return (
     <>
       <Intro
-        number="07 · ABOUT ME"
-        title="다른 경험이 만나는 곳."
+        number="07 · MY STORY"
+        title="경험을 쌓으며, 방향을 만들어 갑니다."
         description="제과·제빵, 전화상담, 그리고 소프트웨어. 최민서의 기록입니다."
       />
       {introductionVideo ? (
@@ -190,27 +158,41 @@ export function AboutMe() {
           className="intro-video"
           controls
           preload="none"
-          poster={introductionVideo.poster}
+          poster={introductionVideo.poster && assetUrl(introductionVideo.poster)}
         >
-          <source src={introductionVideo.src} />
+          <source src={assetUrl(introductionVideo.src)} />
           <track
             kind="captions"
-            src={introductionVideo.captions}
+            src={assetUrl(introductionVideo.captions)}
             srcLang="ko"
             label="한국어"
             default
           />
         </video>
       ) : null}
-      <div className="about-topics">
-        {aboutTopics.map((topic, i) => (
-          <article key={topic.title}>
-            <span className="eyebrow">0{i + 1}</span>
-            <h3>{topic.title}</h3>
-            <p>{topic.description}</p>
-          </article>
-        ))}
-      </div>
+      <section className="story-journey" aria-label="경험 타임라인">
+        <span className="eyebrow">MY JOURNEY</span>
+        <h3>지금의 저를 만든 경험.</h3>
+        <ol className="journey-timeline">
+          {storyJourney.map((step) => (
+            <li key={step.title}>
+              <span className="journey-period">{step.period}</span>
+              <div><h4>{step.title}</h4><p>{step.description}</p></div>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <section className="next-direction" aria-label="다음으로 향하는 방향">
+        <span className="eyebrow">NEXT DIRECTION</span>
+        <h3>{nextDirection.title}</h3>
+        <div className="direction-copy">{nextDirection.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+        <p className="direction-closing">{nextDirection.closing}</p>
+        <footer className="direction-motto">
+          <span className="eyebrow">MY NEXT DIRECTION</span>
+          <h4>{nextDirection.motto}</h4>
+          <p>{nextDirection.message}</p>
+        </footer>
+      </section>
     </>
   );
 }
