@@ -1,3 +1,4 @@
+import BrandLogo from "../components/BrandLogo";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 const ExperienceCanvas = lazy(() => import("../experience/ExperienceCanvas"));
 import { sections } from "../data/sections";
@@ -55,13 +56,14 @@ export default function App() {
           <header className="site-header" inert={expanded}>
             <a
               className="wordmark"
+              aria-label="ARCHIVE V1 작업실"
               href="#"
               onClick={(e) => {
                 e.preventDefault();
                 s.navigate(0);
               }}
             >
-              ARCHIVE V1<span>®</span>
+              <BrandLogo />
             </a>
             <span className="header-note">
               A PERSONAL
@@ -130,7 +132,7 @@ export default function App() {
           </div>
           {(!entered || !s.ready) && (
             <div className="loading-screen" role="dialog" aria-modal="true" aria-label="작업실 입장" data-content>
-              <span className="wordmark">ARCHIVE V1</span>
+              <span className="wordmark"><BrandLogo large /></span>
               {s.ready ? (
                 <button className="explore-button studio-enter" autoFocus
                   onClick={() => useNarrationStore.getState().enterStudio()}>

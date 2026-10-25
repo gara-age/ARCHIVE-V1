@@ -112,11 +112,6 @@ a {
   letter-spacing: -1.4px;
   white-space: nowrap;
 }
-.wordmark > span {
-  font-size: 16px;
-  vertical-align: top;
-  margin-left: 4px;
-}
 .header-note {
   font-size: var(--small);
   line-height: 1.5;
@@ -1312,9 +1307,6 @@ h1 em {
     font-size: 22px;
     letter-spacing: -1px;
   }
-  .wordmark > span {
-    font-size: 14px;
-  }
   .header-actions {
     gap: 6px;
   }
@@ -2038,3 +2030,16 @@ h1 em {
 
 .loading-screen .studio-enter { margin-top: 8px; min-height: 64px; padding: 18px 30px; font-size: var(--control); }
 .loading-screen .studio-enter:focus-visible { outline: 3px solid #4d6545; outline-offset: 6px; }
+
+
+/* Shared V1 identity: a crisp vector mark and a readable wordmark. */
+.brand-lockup { display: inline-flex; align-items: center; gap: 12px; font: inherit; letter-spacing: inherit; line-height: 1; }
+.brand-lockup img { display: block; width: 44px; height: 44px; flex: 0 0 auto; }
+.brand-lockup .brand-name { font: inherit; }
+.brand-lockup-large { flex-direction: column; gap: 18px; }
+.brand-lockup-large img { width: 76px; height: 76px; }
+.loading-screen > .wordmark { margin-bottom: 10px; }
+@media (max-width: 600px) {
+  .site-header .brand-lockup img { width: 38px; height: 38px; }
+  .site-header .brand-name { display: none; }
+}

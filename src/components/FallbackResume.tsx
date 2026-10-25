@@ -1,3 +1,4 @@
+import BrandLogo from "./BrandLogo";
 import { profile } from "../data/profile";
 import { sections } from "../data/sections";
 import { sectionContent, Contact } from "../sections/ArchiveSections";
@@ -6,7 +7,7 @@ export default function FallbackResume({ onClose }: { onClose?: () => void }) {
     <main className="fallback" data-content>
       <header>
         <span className="wordmark">
-          ARCHIVE V1<span>®</span>
+          <BrandLogo />
         </span>
         {onClose ? (
           <button onClick={onClose}>작업실 돌아가기 ↗</button>
