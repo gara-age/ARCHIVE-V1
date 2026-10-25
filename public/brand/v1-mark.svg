@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
   <title>ARCHIVE V1</title>
-  <rect width="64" height="64" rx="15" fill="#293D32"/>
-  <path d="M9 17h7l10 25 10-25h7L29 49h-6L9 17Z" fill="#F5F2E9"/>
-  <path d="m43 23 9-7h4v33h-7V26l-6 4v-7Z" fill="#F5F2E9"/>
+  <path d="M20 27V16H80V27M20 73V84H80V73" stroke="#344B37" stroke-width="5"/>
+  <path d="M24 38 38 65 53 38M63 44 71 38V65" stroke="#344B37" stroke-width="7" stroke-linejoin="miter"/>
 </svg>

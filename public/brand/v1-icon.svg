@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <title>ARCHIVE V1</title>
+  <rect width="100" height="100" rx="23" fill="#293A30"/>
+  <g transform="translate(10 10) scale(.8)" stroke="#F4F2EB">
+    <path d="M20 27V16H80V27M20 73V84H80V73" stroke-width="5"/>
+    <path d="M24 38 38 65 53 38M63 44 71 38V65" stroke-width="7" stroke-linejoin="miter"/>
+  </g>
+</svg>
