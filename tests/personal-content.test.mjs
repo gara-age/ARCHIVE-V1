@@ -23,7 +23,13 @@ test("academic images are withheld unless masked and explicitly public", () => {
   }
 });
 test("only consented real quotes are shown and names respect separate consent", () => {
-  assert.equal(testimonials.length, 0);
+  assert.equal(testimonials.length, 4);
+  assert.deepEqual(publicTestimonials(testimonials).map((record) => record.name), ["윤현님", "박재홍", "송준범", "임채원"]);
+  for (const testimonial of testimonials) {
+    assert.ok(testimonial.quote.length > 90);
+    assert.equal(testimonial.date, null);
+    assert.equal(testimonial.relatedExperience, "");
+  }
   const record = { id: "fixture", quote: "A test-only quote", name: "Test Name", consent: { publishQuote: false, publishName: true } };
   assert.deepEqual(publicTestimonials([record]), []);
   assert.equal(publicTestimonials([{ ...record, consent: { publishQuote: true, publishName: false } }])[0].name, "익명");

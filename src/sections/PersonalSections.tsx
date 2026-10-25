@@ -1,7 +1,7 @@
 import { useId, type SyntheticEvent } from "react";
 import { academicExcellence as academic, publicAcademicEvidence } from "../data/academics";
 import { campusActivities } from "../data/campusActivities";
-import { personalTraits, workIntroduction, workPhilosophy, type TraitId } from "../data/personalTraits";
+import { personalTraits, workIntroduction, workPhilosophy } from "../data/personalTraits";
 import { publicTestimonials, testimonials } from "../data/testimonials";
 import { hobbies } from "../data/hobbies";
 import { interests, interestCategoryLabels } from "../data/interests";
@@ -63,19 +63,24 @@ export function CampusActivities() {
     </>
   );
 }
-export function VoicesAboutMe({ trait }: { trait?: TraitId }) {
-  const records = publicTestimonials(testimonials).filter((record) => !trait || record.traits.includes(trait));
+export function VoicesAboutMe() {
+  const records = publicTestimonials(testimonials);
+  if (!records.length) return null;
   return (
     <section className="voices-board" aria-label="주변 사람들의 평가">
       <span className="eyebrow">VOICES ABOUT ME</span>
       <h3>함께한 사람들의 시선.</h3>
-      {records.length ? records.map((record) => (
-        <details className="voice-card" key={record.id}>
-          <summary>{record.name} · {record.relationship}</summary>
-          <blockquote>{record.quote}</blockquote>
-          <p>{record.relatedExperience}{record.date && ` · ${record.date}`}</p>
-        </details>
-      )) : <div className="voice-empty"><p>아직 등록된 평가가 없습니다.</p><span>실제 함께한 사람의 이야기와 공개 동의를 받은 뒤 채워질 자리입니다.</span></div>}
+      <div className="voice-list">
+        {records.map((record) => (
+          <figure className="voice-card" key={record.id}>
+            <blockquote><p>{record.quote}</p></blockquote>
+            <figcaption>
+              <strong>{record.name}{record.relationship === "지도교수" ? " 교수" : ""}</strong>
+              <span>{record.relationship}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
     </section>
   );
 }
@@ -92,17 +97,16 @@ export function HowIWork() {
               <div className="trait-narrative">{trait.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
               <h4>주요 경험</h4>
               <ul className="trait-highlights">{trait.highlights.map((experience) => <li key={experience.title}><strong>{experience.title}:</strong> {experience.description}</li>)}</ul>
-              {publicTestimonials(testimonials).some((record) => record.traits.includes(trait.id)) && <VoicesAboutMe trait={trait.id} />}
             </div>
           </details>
         ))}
       </div>
+      <VoicesAboutMe />
       <section className="work-philosophy" aria-label="업무 철학">
         <span className="eyebrow">MY WORK PHILOSOPHY</span>
         <h3>{workPhilosophy.english}</h3>
         <p>{workPhilosophy.message}</p>
       </section>
-      {publicTestimonials(testimonials).length > 0 && <VoicesAboutMe />}
     </>
   );
 }
