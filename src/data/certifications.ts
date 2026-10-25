@@ -21,7 +21,7 @@ export const certifications: Certification[] = [
   {
     name: "SQL개발자 · SQLD",
     kind: "qualification",
-    issuer: "한국데이터베이스진흥센터",
+    issuer: "한국데이터산업진흥원",
     date: "2025.06",
     status: "취득 완료",
     skills: [],
@@ -37,7 +37,7 @@ export const certifications: Certification[] = [
     image: null,
   },
   {
-    name: "JLPT 3급",
+    name: "JLPT N3급",
     kind: "language",
     issuer: "일본국제교류기금",
     date: "2025.08",
@@ -54,8 +54,8 @@ export const certificationStatuses = [
 ] as const;
 export const academicRecords = [
   {
-    title: "AI융합소프트웨어",
-    institution: "한국폴리텍2대학(인천캠퍼스)",
+    title: "AI융합소프트웨어과",
+    institution: "한국폴리텍대학 인천캠퍼스",
     period: "2025.03 ~",
     detail: "2년제 · 재학 중",
   },

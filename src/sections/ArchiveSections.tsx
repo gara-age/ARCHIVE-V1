@@ -1,3 +1,4 @@
+import { useSoundStore } from "../media/useSoundStore";
 import { assetUrl } from "../utils/assetUrl";
 import { achievements } from "../data/achievements";
 import { academicRecords, certifications } from "../data/certifications";
@@ -129,7 +130,7 @@ export function SkillsExperience() {
               <div className="experience-period">{e.period}</div>
               <span className="eyebrow">
                 {i === 0
-                  ? "SOFTWARE / INTERNSHIP"
+                  ? "SOFTWARE / WORK EXPERIENCE"
                   : e.role === "제과/제빵사"
                     ? "BEYOND CODE"
                     : "CUSTOMER EXPERIENCE"}
@@ -146,6 +147,7 @@ export function SkillsExperience() {
   );
 }
 export function AboutMe() {
+  const soundEnabled = useSoundStore((s) => s.enabled);
   return (
     <>
       <Intro
@@ -156,6 +158,7 @@ export function AboutMe() {
       {introductionVideo ? (
         <video
           className="intro-video"
+          muted={!soundEnabled}
           controls
           preload="none"
           poster={introductionVideo.poster && assetUrl(introductionVideo.poster)}

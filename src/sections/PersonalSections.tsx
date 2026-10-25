@@ -122,10 +122,13 @@ export function HobbiesAndValues() {
         <h3>취향과 생각의 조각들.</h3>
         <div className="interest-grid">
           {interests.map((interest) => (
-            <article className={`interest-card ${interest.isExample ? "is-example" : "is-personal"}`} key={interest.id}>
+            <article className={`interest-card interest-${interest.id} ${interest.isExample ? "is-example" : "is-personal"}`} key={interest.id}>
               <div className="interest-label"><span>{interestCategoryLabels[interest.category]}</span>{interest.isExample && <span className="example-tag">예시</span>}</div>
               <h4>{interest.title}</h4>
-              <p>{interest.description}</p>
+              {interest.description && <p>{interest.description}</p>}
+              {interest.items && <ul className="interest-items">{interest.items.map((item) => <li key={item.title}>
+                <strong>{item.title}</strong>{item.description && <p>{item.description}</p>}
+              </li>)}</ul>}
             </article>
           ))}
         </div>

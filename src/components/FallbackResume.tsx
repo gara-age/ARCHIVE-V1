@@ -1,3 +1,4 @@
+import SoundToggle from "./SoundToggle";
 import BrandLogo from "./BrandLogo";
 import { profile } from "../data/profile";
 import { sections } from "../data/sections";
@@ -9,6 +10,7 @@ export default function FallbackResume({ onClose }: { onClose?: () => void }) {
         <span className="wordmark">
           <BrandLogo />
         </span>
+        <SoundToggle />
         {onClose ? (
           <button onClick={onClose}>작업실 돌아가기 ↗</button>
         ) : (

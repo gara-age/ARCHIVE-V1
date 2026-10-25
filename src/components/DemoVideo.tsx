@@ -1,9 +1,11 @@
+import { useSoundStore } from "../media/useSoundStore";
 import { assetUrl } from "../utils/assetUrl";
 import { useEffect, useRef, useState } from "react";
 import type { Demo } from "../data/demos";
 import { useTourStore } from "../navigation/useTourStore";
 const playingVideos = new Set<HTMLVideoElement>();
 export default function DemoVideo({ demo }: { demo: Demo }) {
+  const soundEnabled = useSoundStore((s) => s.enabled);
   const video = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function DemoVideo({ demo }: { demo: Demo }) {
         ref={video}
         key={demo.id}
         controls
+        muted={!soundEnabled}
         playsInline
         preload="none"
         poster={assetUrl(demo.poster)}

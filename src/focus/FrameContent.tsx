@@ -1,3 +1,4 @@
+import SoundToggle from "../components/SoundToggle";
 import { NarrationControls } from "../components/NarrationPlayer";
 import { useEffect, useRef } from "react";
 import { useTourStore } from "../navigation/useTourStore";
@@ -74,6 +75,7 @@ export default function FrameContent() {
           <span>
             <i /> {section.number} / {section.title}
           </span>
+          <SoundToggle compact />
           <NarrationControls />
           {expanded ? (
             <button

@@ -7,7 +7,7 @@ import FrameContent from "../focus/FrameContent";
 import TourController from "../navigation/TourController";
 import Navigation from "../components/Navigation";
 import NarrationPlayer, { NarrationControls } from "../components/NarrationPlayer";
-import SoundToggle from "../components/SoundToggle";
+import SoundToggle, { MediaSoundController } from "../components/SoundToggle";
 import FallbackResume from "../components/FallbackResume";
 import { useNarrationStore } from "../media/useNarrationStore";
 import { SceneRecovery, type SceneStatus } from "../experience/sceneRecovery";
@@ -29,6 +29,7 @@ export default function App() {
   const focused = s.viewMode === "FOCUSED" || expanded;
   return (
     <>
+      <MediaSoundController />
       <NarrationPlayer suspended={showFallback} />
       {!failed && scene.phase !== "retrying" && (
         <Suspense fallback={null}>
@@ -72,7 +73,7 @@ export default function App() {
             </span>
             <div className="header-actions">
               {!focused && <NarrationControls />}
-              <SoundToggle />
+              {!focused && <SoundToggle />}
               <button
                 onClick={() => setFallback(true)}
                 className="index-button"

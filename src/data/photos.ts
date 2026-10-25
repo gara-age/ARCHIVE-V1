@@ -43,7 +43,7 @@ export const photos: ArchivePhoto[] = [
     full: "/media/photos/navi-certificate-full.webp",
     width: 1018,
     height: 1440,
-    alt: "2026 전반기 학술발표대회 Navi 관련 상장 원문, 수상 등급 우수상",
+    alt: "2026 전반기 학술발표대회 Navi 관련 상장 원문, 수상 등급 우수논문상",
     caption: "Navi · 학술발표대회 상장 원문",
     sourceFile: "Navi_한국산업기술융합학회_우수논문상.JPG",
     kind: "certificate",

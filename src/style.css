@@ -1927,7 +1927,7 @@ h1 em {
 
 .interest-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
 .interest-card { padding: 24px; background: #eeece2; border: 1px solid #c7cbb9; border-radius: 4px; min-width: 0; }
-.interest-card.is-personal { grid-column: 1 / -1; background: #e4eadc; border-left: 3px solid #7c9068; }
+.interest-card.is-personal { background: #e4eadc; border-left: 3px solid #7c9068; }
 .interest-label { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: var(--small); color: var(--muted); margin-bottom: 14px; }
 .example-tag { border: 1px solid #a8b299; border-radius: 3px; padding: 1px 8px; white-space: nowrap; }
 .interest-card h4 { font-size: var(--control); font-weight: 600; line-height: 1.5; margin-bottom: 14px; }
@@ -2043,3 +2043,15 @@ h1 em {
   .site-header .brand-lockup img { width: 38px; height: 38px; }
   .site-header .brand-name { display: none; }
 }
+
+.interest-v1, .interest-quote, .interest-goals, .interest-attitudes { grid-column: 1 / -1; }
+.interest-items { padding-left: 24px; margin: 20px 0 0; }
+.interest-items li { margin: 0 0 20px; padding-left: 4px; }
+.interest-items li:last-child { margin-bottom: 0; }
+.interest-items strong { font-size: var(--body); }
+.interest-items li p { margin: 8px 0 0; }
+
+.sound-button-compact .sound-label { display: none; }
+.monitor-toolbar .sound-button-compact { min-width: 42px; min-height: 42px; padding: 8px; background: transparent; color: var(--ink); }
+
+@media (max-width: 600px) { .fallback header { flex-wrap: wrap; } .fallback header .sound-button { margin-left: auto; } }

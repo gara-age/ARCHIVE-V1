@@ -23,4 +23,4 @@
 | [optional-deliver.txt](narration/optional-deliver.txt) | 06-C. DELIVER | 35~40초 |
 | [optional-next-direction.txt](narration/optional-next-direction.txt) | 07-A. NEXT DIRECTION | 35~40초 |
 
-기본 12편 + 선택 6편입니다. 선택 대본은 통합 소개와 중복 재생하지 않습니다. 08 영역의 예시 데이터는 화면 텍스트 정리본의 점검 사항을 확인하세요.
+기본 12편 + 선택 6편입니다. 선택 대본은 통합 소개와 중복 재생하지 않습니다. 08 영역의 개인 콘텐츠는 실제 내용으로 확정되었습니다. 기존 녹음 파일은 유지하며 JLPT 등급 표기는 최신 대본에 반영했습니다.

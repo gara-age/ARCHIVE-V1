@@ -1,3 +1,4 @@
+import { useSoundStore } from "../media/useSoundStore";
 import { assetUrl } from "../utils/assetUrl";
 import { useEffect, useRef } from "react";
 import { sections } from "../data/sections";
@@ -8,6 +9,7 @@ import { useNarrationStore } from "../media/useNarrationStore";
 
 // One audio element owns narration for the entire studio, including full-screen readers.
 export default function NarrationPlayer({ suspended }: { suspended: boolean }) {
+  const soundEnabled = useSoundStore((s) => s.enabled);
   const audio = useRef<HTMLAudioElement>(null);
   const controller = useRef<NarrationPlayback | null>(null);
   const entryTrack = useRef<string | null>(null);
@@ -58,6 +60,7 @@ export default function NarrationPlayer({ suspended }: { suspended: boolean }) {
   return <audio
     ref={audio}
     data-narration
+    muted={!soundEnabled}
     preload="metadata"
     aria-label={`${track?.title || "영역"} 소개 음성`}
     onPlay={() => useNarrationStore.setState({ status: "playing" })}
