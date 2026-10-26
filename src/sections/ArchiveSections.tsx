@@ -205,16 +205,13 @@ export function BeyondCode() {
       <Intro
         number="08 · BEYOND CODE / V1 SPEED"
         title="결심하고, 앞으로."
-        description="V1 — 첫 번째 기록, 그리고 다음을 향한 결정."
       />
-      <div className="flight-art">
-        <span>ARCHIVE V1 / CLEARED FOR WHAT'S NEXT</span>
-        <strong>V1</strong>
-        <span className="flight-line" />
-        <span>DECISION → DIRECTION → DEPARTURE</span>
-      </div>
-      <h3 className="story-title">{beyondStory.title}</h3>
-      <p className="story-paragraph">{beyondStory.description}</p>
+      <section className="v1-statement" aria-label="ARCHIVE V1에 담은 의미">
+        <span className="eyebrow">WHY V1</span>
+        <h3>{beyondStory.title}</h3>
+        <p>{beyondStory.description}</p>
+        <p>{beyondStory.commitment}</p>
+      </section>
       <HobbiesAndValues />
     </>
   );

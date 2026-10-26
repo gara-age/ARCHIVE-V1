@@ -14,11 +14,6 @@ export const interestCategoryLabels: Record<InterestCategory, string> = {
 // Personal content supplied and confirmed by the user. V1 is a personal metaphor for taking action.
 export const interests: PersonalInterest[] = [
   {
-    id: "v1", category: "value", isExample: false,
-    title: "V1 — The Decision to Take Off",
-    description: "V1은 첫 번째 버전이면서, 항공의 이륙결심속도에서 영감을 받은 이름입니다. 새로운 배움을 선택하고, 경험을 통해 다음 방향을 만들어 가려는 마음을 ARCHIVE V1에 담았습니다.",
-  },
-  {
     id: "favorites", category: "favorite", isExample: false,
     title: "분위기 좋은 카페부터 과학까지",
     description: "분위기 좋은 카페, 아름답고 완성도 높은 디자인, 패션, 시, 과학을 좋아합니다.",
@@ -27,11 +22,6 @@ export const interests: PersonalInterest[] = [
     id: "interests", category: "interest", isExample: false,
     title: "새로운 사실과 다양한 분야",
     description: "AI 활용과 새로운 사실을 알아가는 일, 패션과 스타일링, 일본, 제과·제빵에 관심이 있습니다.",
-  },
-  {
-    id: "quote", category: "quote", isExample: false,
-    title: "V1 Speed (Decision Speed)",
-    description: "이륙결심속도에서 영감을 받은 문구입니다. 도전을 두려워하던 제가 이제는 완벽한 준비만 기다리지 않고, 저의 삶을 위해 새로운 시도를 선택하자는 다짐을 담았습니다.",
   },
   {
     id: "goals", category: "goal", isExample: false,

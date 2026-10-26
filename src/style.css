@@ -973,37 +973,19 @@ h1 em {
   line-height: 1.9;
   color: var(--muted);
 }
-.flight-art {
-  position: relative;
+.v1-statement {
   padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin: 24px 0 32px;
   background: #657c59;
   color: #fff;
-  overflow: hidden;
 }
-.flight-art > span {
-  font-size: var(--small);
-  z-index: 1;
+.v1-statement .eyebrow { color: #fff; opacity: .85; }
+.v1-statement h3 {
+  margin: 14px 0 18px;
+  font-size: var(--heading);
+  line-height: 1.4;
 }
-.flight-art strong {
-  font-family: Manrope, sans-serif;
-  font-size: 100px;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: -6px;
-  z-index: 1;
-}
-.flight-line {
-  position: absolute;
-  left: 0;
-  top: 55%;
-  width: 120%;
-  height: 1px;
-  background: #ffffff66;
-  transform: rotate(-20deg);
-}
+.v1-statement p { font-size: var(--body); line-height: 1.85; margin: 14px 0 0; }
 .story-title {
   font-family: Georgia, serif;
   font-size: var(--heading);
@@ -2044,7 +2026,7 @@ h1 em {
   .site-header .brand-name { display: none; }
 }
 
-.interest-v1, .interest-quote, .interest-goals, .interest-attitudes { grid-column: 1 / -1; }
+.interest-goals, .interest-attitudes { grid-column: 1 / -1; }
 .interest-items { padding-left: 24px; margin: 20px 0 0; }
 .interest-items li { margin: 0 0 20px; padding-left: 4px; }
 .interest-items li:last-child { margin-bottom: 0; }

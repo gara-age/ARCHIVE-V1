@@ -47,8 +47,9 @@ test("unknown activity dates and supporting materials stay unfilled", () => {
 });
 test('confirmed interests replace all five example cards and preserve the supplied goals and attitudes', async () => {
  const {interests}=await import('../src/data/interests.ts');
+ const {beyondStory}=await import('../src/data/stories.ts');
  assert.ok(interests.every(i=>!i.isExample));
- const text=JSON.stringify(interests);
+ const text=JSON.stringify({interests,beyondStory});
  for(const value of ['분위기 좋은 카페','완성도 높은 디자인','패션','과학','시,','AI 활용','스타일링','일본','제과·제빵','V1 Speed (Decision Speed)','스스로에게 당당한 사람','소중한 사람','책임감과 완수','몰입과 배움','협력과 배려','도전과 실행','진정성과 신뢰']) assert.ok(text.includes(value),value);
  assert.ok(!text.includes('개발자라는 진로'));
  assert.equal(interests.find(i=>i.id==='attitudes').items.length,5);
