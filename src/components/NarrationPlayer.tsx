@@ -75,6 +75,8 @@ export function NarrationControls() {
   const label = playing ? "음성 일시정지" : status === "ended" ? "다시 듣기" : "소개 듣기";
   return <button className="narration-control" type="button" disabled={!available}
     aria-label={`${title} ${label}`} aria-pressed={playing} onClick={togglePlayback}>
-    <span aria-hidden="true">{playing ? "Ⅱ" : "▶"}</span><span>{label}</span>
+    <svg className="audio-control-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {playing ? <><path d="M8 5v14M16 5v14" /></> : <path d="m8 5 11 7-11 7V5Z" />}
+    </svg><span>{label}</span>
   </button>;
 }

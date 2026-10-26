@@ -142,26 +142,11 @@ a {
 .sound-button {
   font-size: var(--small);
 }
-.sound-bars {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  height: 25px;
-}
-.sound-bars i {
+.audio-control-icon {
   display: block;
-  width: 3px;
-  height: 10px;
-  background: currentColor;
-}
-.sound-bars i:nth-child(2) {
+  width: 22px;
   height: 22px;
-}
-.sound-bars i:nth-child(3) {
-  height: 16px;
-}
-.sound-bars.on i {
-  animation: pulse 0.6s infinite alternate;
+  flex: 0 0 auto;
 }
 h1 {
   font-family: Manrope, "Noto Sans KR", sans-serif;
@@ -1300,12 +1285,6 @@ h1 em {
   }
 
 
-  .sound-bars {
-    gap: 2px;
-  }
-  .sound-bars i {
-    width: 2px;
-  }
   .sound-button {
     min-width: 30px;
   }
