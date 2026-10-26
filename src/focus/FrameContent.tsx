@@ -73,7 +73,7 @@ export default function FrameContent() {
       >
         <div className="monitor-toolbar">
           <span>
-            <i /> {section.number} / {section.title}
+            <span className="reader-section-number">{section.number}</span> {section.title}
           </span>
           <SoundToggle compact />
           <NarrationControls />
@@ -83,7 +83,7 @@ export default function FrameContent() {
               onClick={() => useTourStore.getState().collapse()}
               aria-label="확대 닫기"
             >
-              닫기 <span>ESC ↙</span>
+              닫기 <span aria-hidden="true">×</span>
             </button>
           ) : (
             <button
@@ -91,7 +91,7 @@ export default function FrameContent() {
               onClick={() => useTourStore.getState().expand()}
               aria-label="콘텐츠 확대"
             >
-              전체화면 <span>↗</span>
+              <span className="reader-expand-label" aria-hidden="true">전체화면</span><span className="reader-expand-short" aria-hidden="true">확대</span> <span aria-hidden="true">↗</span>
             </button>
           )}
         </div>
@@ -108,7 +108,7 @@ export default function FrameContent() {
           </div>
         ))}
         <div className="monitor-footer">
-          <span>ARCHIVE V1®</span>
+          <span>ARCHIVE V1</span>
           <span>작품 · 경험 · 배움의 기록</span>
           <span>아래로 스크롤 ↓</span>
         </div>

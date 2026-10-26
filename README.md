@@ -1,3 +1,5 @@
+> UI 개편: 흰색 읽기 화면, 큰 본문 24px, 사진 중심 작품 소개와 단정한 1:1 탭. 공통 스타일은 src/reader-ui.css에서 관리합니다.
+
 > 실사 스타일 재질·조명 업데이트: [GRAPHICS.md](./GRAPHICS.md).
 
 > 콘텐츠 확장 반영: 10개 정보 구간, 학기 성적, 학과 활동, 업무 스타일·주변 평가, 취미·가치관. 상세 구현과 추가 자료 입력 방법은 [CONTENT_EXTENSION.md](./CONTENT_EXTENSION.md)를 참고하세요.

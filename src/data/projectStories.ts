@@ -1,9 +1,15 @@
 export type ProjectStory = {
+  lead: string;
+  role: string;
+  highlights: string[];
   summary: string;
   sections: { title: string; paragraphs?: string[]; items?: { title: string; text: string }[] }[];
 };
 export const projectStories: Record<string, ProjectStory> = {
   bokji: {
+    lead: "디지털 취약계층을 위한 AI 공공서비스 안내 키오스크",
+    role: "팀장 · 서비스 기획 · UI/UX · 프론트엔드 개발",
+    highlights: ["사용자에게 맞추는 화면", "비접촉 입력과 음성 안내", "근거를 제시하는 공공정보 검색"],
     summary: "고령자, 장애인 등 디지털 취약계층이 공공서비스를 보다 편리하게 이용할 수 있도록 개발한 AI 기반 접근성 키오스크입니다.",
     sections: [
       { title: "기획 배경", paragraphs: [
@@ -29,6 +35,9 @@ export const projectStories: Record<string, ProjectStory> = {
     ],
   },
   navi: {
+    lead: "말이나 글로 목표를 전달하면 PC 작업을 수행하는 AI 자동화 시스템",
+    role: "팀장 · 서비스 기획 · UI/UX · 프론트엔드 개발",
+    highlights: ["음성·텍스트로 작업 요청", "작업 계획부터 실행·검증·복구까지", "진행 상태가 보이는 접근성 UI"],
     summary: "시각장애인, 고령자 등 컴퓨터 사용에 어려움을 겪는 사람들이 복잡한 조작 방법을 익히지 않고도 원하는 작업을 수행할 수 있도록 개발한 AI 기반 PC 작업 자동화 시스템입니다.",
     sections: [
       { title: "기획 배경", paragraphs: [

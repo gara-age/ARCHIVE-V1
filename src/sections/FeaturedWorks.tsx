@@ -5,12 +5,16 @@ import { projects } from "../data/projects";
 import { demos } from "../data/demos";
 import ArchivePhoto from "../components/ArchivePhoto";
 import { photos } from "../data/photos";
-import { DemoDisclosure } from "../components/DemoVideo";
+import DemoVideo from "../components/DemoVideo";
 export default function FeaturedWorks() {
   const [selected, setSelected] = useState(0);
+  const [openDemo, setOpenDemo] = useState<string | null>(null);
   const instance = useId();
   const project = projects[selected];
-  useEffect(() => { useNarrationStore.setState({ projectId: project.id }); }, [project.id]);
+  useEffect(() => {
+    useNarrationStore.setState({ projectId: project.id });
+    setOpenDemo(null);
+  }, [project.id]);
   const story = projectStories[project.id];
   const demo = demos.find((d) => d.projectId === project.id);
   const activity = photos.find(
@@ -18,10 +22,6 @@ export default function FeaturedWorks() {
   );
   return (
     <>
-      <div className="content-intro">
-        <span className="eyebrow">01 / FEATURED WORKS</span>
-        <h2>작품과 시연, 수상의 기록.</h2>
-      </div>
       <div className="project-tabs" role="tablist" aria-label="대표 프로젝트">
         {projects.map((p, i) => (
           <button
@@ -45,15 +45,7 @@ export default function FeaturedWorks() {
             onClick={() => setSelected(i)}
             key={p.id}
           >
-            <span>0{i + 1}</span>
             <strong>{p.name}</strong>
-            <small>
-              {demos.find((d) => d.projectId === p.id)?.id === "navi-academic"
-                ? "우수논문상 · 시연"
-                : demos.some((d) => d.projectId === p.id)
-                  ? "동상 · 시연"
-                  : "자료 준비 중"}
-            </small>
           </button>
         ))}
       </div>
@@ -62,35 +54,30 @@ export default function FeaturedWorks() {
         role="tabpanel"
         aria-labelledby={`${instance}-tab-${project.id}`}
       >
-        {demo ? (
-          <>
-            <div className="project-photo-heading">
-              <h3>{project.name}</h3>
-              <span className="award-badge">{demo.award}</span>
-            </div>
-            <p className="project-lead">{story.summary}</p>
+        <header className="work-heading">
+          <h2>{project.name}</h2>
+          <p>{story.lead}</p>
+        </header>
+        <div className="work-overview">
+          <div className="work-visual">
             {activity && <ArchivePhoto key={activity.id} photo={activity} />}
-            <DemoDisclosure key={demo.id} demo={demo} />
-          </>
-        ) : (
-          <div className="project-art" style={{ background: project.color }}>
-            <span className="art-grid" />
-            <span className="art-small">ARCHIVE V1 / PROJECT STUDY</span>
-            <strong>{project.english}</strong>
-            <span className="art-tag">실제 구현 화면·영상 준비 중</span>
           </div>
-        )}
-        {!demo && (
-          <div className="project-heading">
-            <div>
-              <h3>{project.name}</h3>
-            </div>
-          </div>
-        )}
-        {!demo && <p className="project-lead">{project.description}</p>}
+          <aside className="work-summary" aria-label={`${project.name} 핵심 정보`}>
+            {demo && <div className="work-award"><span>수상</span><strong>{demo.award}</strong></div>}
+            <div className="work-role"><span>담당 역할</span><p>{story.role}</p></div>
+            {demo && <button className="work-demo-button" aria-expanded={openDemo === demo.id} aria-controls={`${instance}-demo`} onClick={() => setOpenDemo(openDemo === demo.id ? null : demo.id)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z" /></svg>
+              {openDemo === demo.id ? "시연 영상 닫기" : "시연 영상 보기"}
+            </button>}
+            <ul className="work-highlights">{story.highlights.map((item) => <li key={item}>{item}</li>)}</ul>
+          </aside>
+        </div>
+        <div id={`${instance}-demo`} className="work-demo" hidden={!demo || openDemo !== demo.id}>
+          {demo && openDemo === demo.id && <DemoVideo key={demo.id} demo={demo} />}
+        </div>
         <div className="project-story">
           {story.sections.map((section) => <section className="project-story-section" key={section.title}>
-            <h4>{section.title}</h4>
+            <h3>{section.title}</h3>
             {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             {section.items && <ul>{section.items.map((item) => <li key={item.title}><strong>{item.title}</strong><p>{item.text}</p></li>)}</ul>}
           </section>)}
