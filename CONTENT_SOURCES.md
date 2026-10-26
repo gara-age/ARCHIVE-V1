@@ -108,3 +108,11 @@
 ## 개인 콘텐츠 및 이력 정정 · 2026-10-26
 
 사용자가 제공한 취향·관심 분야·V1 문구·세 가지 목표·다섯 가지 태도로 08 영역의 예시 데이터를 교체했습니다. V1 설명은 진로를 한 직무로 한정하지 않고 경험으로 방향을 만들어 가는 관점으로 수정했습니다. SQLD 발급기관은 한국데이터산업진흥원, JLPT는 N3급, 학교·학과는 한국폴리텍대학 인천캠퍼스 / AI융합소프트웨어과로 통일했습니다. 사용자 후속 답변에 따라 트랜스코스모스코리아의 두 경력을 모두 제외하고 기업 일경험의 인턴 표현을 제거했습니다. 기존 녹음 파일은 유지하고 화면 텍스트와 관련 대본·ZIP을 갱신했습니다.
+
+## 배경음악 · 2026-10-26
+
+사용자 요청으로 Debussy의 Clair de lune를 연결했습니다. Wikimedia Commons에서 녹음물 자체가 CC BY 3.0으로 명시된 Laurens Goedhart의 2011년 피아노 연주를 사용합니다. 원곡의 퍼블릭 도메인 여부와 녹음물 라이선스를 구분합니다. 원본 파일 SHA1을 Commons 메타데이터와 대조했습니다. 연락처 영역에 곡명·연주자·음원 출처·라이선스 링크·음량 조정 사실을 표시했습니다.
+
+원본: https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg
+라이선스: https://creativecommons.org/licenses/by/3.0/
+변경: AAC/M4A 변환, -24dB 음량 조정, 시작 2초·끝 3초 페이드. 처리·파일 정보는 docs/background-music.json, 배포 음원 옆에 LICENSE.txt를 포함합니다.

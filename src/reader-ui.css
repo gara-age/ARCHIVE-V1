@@ -150,6 +150,8 @@ button:focus-visible, a:focus-visible, summary:focus-visible, [tabindex]:focus-v
 .v1-statement p { color: #505e55; }
 .v1-statement h3 { font-size: 32px; font-weight: 600; }
 .contact-links > div { border-color: var(--line); }
+.music-credit { margin-top: 36px; color: var(--muted); font-size: 16px; line-height: 1.8; }
+.music-credit a { text-decoration: underline; text-underline-offset: 3px; }
 .tour-controls button { border: 0; background: #ffffffde; box-shadow: 0 2px 8px #18241e08; }
 .contents-toggle { border: 0; border-radius: 14px; background: #ffffffeb; box-shadow: 0 4px 20px #18241e10; }
 .scene-nav.menu-open { background: #fffffff5; border: 1px solid #e9ecef; border-radius: 18px; box-shadow: 0 12px 40px #18241e18; }

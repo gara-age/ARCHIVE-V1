@@ -131,3 +131,5 @@ WebGL 연결 손실이나 3D 초기화 오류가 생기면 현재 구간을 유�
 외부 접속 주소: https://gara-age.github.io/ARCHIVE-V1/
 
 main 푸시 시 `.github/workflows/pages.yml`이 Node.js 24에서 `npm ci` → `npm test` → Pages 경로로 빌드 → 배포를 진행합니다. 이미지·영상·나레이션·3D 텍스처는 `assetUrl`로 배포 경로를 반영합니다. 로컬 개발은 기존대로 `npm ci`, `npm run dev`를 사용합니다. Pages와 같은 경로를 로컬에서 확인하려면 `VITE_BASE_PATH=/ARCHIVE-V1/ npm run build` 후 같은 환경변수로 `npm run preview`를 실행하고 `/ARCHIVE-V1/`에 접속합니다.
+
+배경음악은 작업실 입장 시 시작해 반복 재생됩니다. 나레이션·영상과 별도로 이어지며 SOUND OFF는 배경음악도 함께 음소거합니다. 음원 출처와 라이선스는 public/media/music/LICENSE.txt 및 CONTENT_SOURCES.md에 기록했습니다.

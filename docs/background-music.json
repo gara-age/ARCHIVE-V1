@@ -1,0 +1,19 @@
+{
+  "title": "Clair de lune",
+  "composer": "Claude Debussy",
+  "performer": "Laurens Goedhart",
+  "year": 2011,
+  "license": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg",
+  "sourceSha1": "50d152ad99294c8dd3783b6ddde30b1dfaef19c3",
+  "outputSha256": "cc15f9fa111337ac3a4e8e8bfa5e8223dbc3a1d766a38e3f0f9fe52b68cf7ed7",
+  "output": "public/media/music/clair-de-lune-quiet.m4a",
+  "durationSeconds": 304.09,
+  "gainDb": -24,
+  "fadeInSeconds": 2,
+  "fadeOutSeconds": 3,
+  "meanVolumeDb": -50,
+  "peakDb": -25,
+  "bytes": 4285426
+}

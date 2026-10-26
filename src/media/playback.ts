@@ -2,11 +2,14 @@ export type PlaybackMedia = {
   tagName: string;
   pause: () => void;
   currentTime: number;
+  dataset?: { backgroundMusic?: string };
 };
 // Video keeps its position; narration stops and returns to the beginning.
 export function claimPlayback(current: PlaybackMedia, peers: Iterable<PlaybackMedia>) {
+  // Ambient music neither interrupts nor gets interrupted by foreground media.
+  if (current.dataset?.backgroundMusic !== undefined) return;
   for (const peer of peers) {
-    if (peer === current) continue;
+    if (peer === current || peer.dataset?.backgroundMusic !== undefined) continue;
     peer.pause();
     if (peer.tagName.toLowerCase() === "audio") peer.currentTime = 0;
   }

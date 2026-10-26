@@ -35,6 +35,23 @@ test('playing narration pauses video without losing video position', () => {
   claimPlayback(narration,[narration,video]);
   assert.equal(video.paused,true);assert.equal(video.currentTime,36);
 });
+test('narration and video leave ambient music playing at its current position', () => {
+  const music=media();music.dataset={backgroundMusic:''};music.currentTime=42;music.paused=false;
+  const narration=media(),video=media('VIDEO');
+  claimPlayback(narration,[music,narration,video]);
+  assert.equal(music.paused,false);assert.equal(music.currentTime,42);
+  claimPlayback(video,[music,narration,video]);
+  assert.equal(music.paused,false);assert.equal(music.currentTime,42);
+  assert.equal(narration.paused,true);
+});
+test('starting ambient music does not interrupt narration or a demonstration', () => {
+  const music=media();music.dataset={backgroundMusic:''};
+  const narration=media(),video=media('VIDEO');narration.paused=video.paused=false;
+  narration.currentTime=12;video.currentTime=24;
+  claimPlayback(music,[music,narration,video]);
+  assert.equal(narration.paused,false);assert.equal(video.paused,false);
+  assert.equal(narration.currentTime,12);assert.equal(video.currentTime,24);
+});
 test('A → B → A restarts audio every visit, with no once-only playback flag', async () => {
   const node=media();const player=new NarrationPlayback(node,()=>assert.fail('unexpected block'));
   player.visit('A');node.currentTime=20;

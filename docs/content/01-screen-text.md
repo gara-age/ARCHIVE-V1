@@ -578,6 +578,8 @@ EMAIL · minseo00515@naver.com ↗
 PHONE · 010-7644-5708 ↗
 GITHUB · gara-age ↗
 
+음악 크레딧: 배경음악 · Clair de lune — Claude Debussy / 연주 Laurens Goedhart · CC BY 3.0 · 음량 조정
+
 ## 공통 메뉴와 조작 문구
 
 ### 상단·목차·하단

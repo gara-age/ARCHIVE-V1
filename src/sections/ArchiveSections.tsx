@@ -242,7 +242,10 @@ export function Contact({ compact = false }: { compact?: boolean }) {
           </div>
         ))}
       </div>
-
+      <p className="music-credit">
+        배경음악 · <a href="https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg" target="_blank" rel="noreferrer">Clair de lune — Claude Debussy</a><br />
+        연주 Laurens Goedhart · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a> · 음량 조정
+      </p>
     </div>
   );
 }

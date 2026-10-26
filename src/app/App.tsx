@@ -1,4 +1,5 @@
 import BrandLogo from "../components/BrandLogo";
+import BackgroundMusic from "../components/BackgroundMusic";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 const ExperienceCanvas = lazy(() => import("../experience/ExperienceCanvas"));
 import { sections } from "../data/sections";
@@ -10,6 +11,7 @@ import NarrationPlayer, { NarrationControls } from "../components/NarrationPlaye
 import SoundToggle, { MediaSoundController } from "../components/SoundToggle";
 import FallbackResume from "../components/FallbackResume";
 import { useNarrationStore } from "../media/useNarrationStore";
+import { useSoundStore } from "../media/useSoundStore";
 import { SceneRecovery, type SceneStatus } from "../experience/sceneRecovery";
 import { useTourStore } from "../navigation/useTourStore";
 export default function App() {
@@ -30,6 +32,7 @@ export default function App() {
   return (
     <>
       <MediaSoundController />
+      <BackgroundMusic />
       <NarrationPlayer suspended={showFallback} />
       {!failed && scene.phase !== "retrying" && (
         <Suspense fallback={null}>
@@ -136,7 +139,10 @@ export default function App() {
               <span className="wordmark"><BrandLogo large /></span>
               {s.ready ? (
                 <button className="explore-button studio-enter" autoFocus
-                  onClick={() => useNarrationStore.getState().enterStudio()}>
+                  onClick={() => {
+                    useNarrationStore.getState().enterStudio();
+                    useSoundStore.getState().startMusic();
+                  }}>
                   작업실 들어가기 <span aria-hidden="true">↗</span>
                 </button>
               ) : <p role="status">{scene.attempt > 0 ? "작업실을 다시 불러오는 중" : "작업실의 불을 켜는 중"}</p>}
