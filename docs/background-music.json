@@ -7,13 +7,14 @@
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
   "source": "https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg",
   "sourceSha1": "50d152ad99294c8dd3783b6ddde30b1dfaef19c3",
-  "outputSha256": "cc15f9fa111337ac3a4e8e8bfa5e8223dbc3a1d766a38e3f0f9fe52b68cf7ed7",
-  "output": "public/media/music/clair-de-lune-quiet.m4a",
+  "outputSha256": "b4392b5600fb83c771e4c41c27ceb58bac71dce8a80e81267c91fdd8bca95adb",
+  "output": "public/media/music/clair-de-lune-soft-v2.m4a",
   "durationSeconds": 304.09,
-  "gainDb": -24,
+  "gainDb": -18,
   "fadeInSeconds": 2,
   "fadeOutSeconds": 3,
-  "meanVolumeDb": -50,
-  "peakDb": -25,
-  "bytes": 4285426
+  "meanVolumeDb": -44,
+  "peakDb": -19,
+  "bytes": 4881532,
+  "volumeIncreaseDb": 6
 }

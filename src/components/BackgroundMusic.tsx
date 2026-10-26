@@ -4,7 +4,7 @@ import { useSoundStore } from "../media/useSoundStore";
 import { assetUrl } from "../utils/assetUrl";
 
 // This persistent player is independent of section narration and video playback.
-// The file itself is attenuated by 24 dB, including on mobile browsers that ignore volume.
+// The file itself is attenuated by 18 dB, including on mobile browsers that ignore volume.
 export default function BackgroundMusic() {
   const audio = useRef<HTMLAudioElement>(null);
   const enabled = useSoundStore((state) => state.enabled);
@@ -30,6 +30,6 @@ export default function BackgroundMusic() {
     };
   }, []);
   return <audio ref={audio} data-background-music aria-hidden="true"
-    src={assetUrl("/media/music/clair-de-lune-quiet.m4a")} preload="none"
+    src={assetUrl("/media/music/clair-de-lune-soft-v2.m4a")} preload="none"
     loop playsInline muted={!enabled} />;
 }

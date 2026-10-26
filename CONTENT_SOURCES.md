@@ -115,4 +115,4 @@
 
 원본: https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg
 라이선스: https://creativecommons.org/licenses/by/3.0/
-변경: AAC/M4A 변환, -24dB 음량 조정, 시작 2초·끝 3초 페이드. 처리·파일 정보는 docs/background-music.json, 배포 음원 옆에 LICENSE.txt를 포함합니다.
+변경: AAC/M4A 변환, -18dB 음량 조정(사용자 요청에 따라 초기 버전보다 +6dB), 시작 2초·끝 3초 페이드. 처리·파일 정보는 docs/background-music.json, 배포 음원 옆에 LICENSE.txt를 포함합니다.

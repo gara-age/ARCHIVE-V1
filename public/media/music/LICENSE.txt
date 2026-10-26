@@ -5,6 +5,6 @@ Recording license: Creative Commons Attribution 3.0 Unported
 https://creativecommons.org/licenses/by/3.0/
 Source: https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg
 Original performer source: https://soundcloud.com/laurensgoedhart/claude-debussys-clair-de-lune
-Changes: converted from Ogg Vorbis to AAC/M4A, gain reduced by 24 dB, 2-second fade in and 3-second fade out. No endorsement implied.
+Changes: converted from Ogg Vorbis to AAC/M4A, gain reduced by 18 dB, 2-second fade in and 3-second fade out. No endorsement implied.
 Source SHA1: 50d152ad99294c8dd3783b6ddde30b1dfaef19c3
-Output SHA256: cc15f9fa111337ac3a4e8e8bfa5e8223dbc3a1d766a38e3f0f9fe52b68cf7ed7
+Output SHA256: b4392b5600fb83c771e4c41c27ceb58bac71dce8a80e81267c91fdd8bca95adb
