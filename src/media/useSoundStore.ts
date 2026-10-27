@@ -1,8 +1,6 @@
 import { create } from "zustand";
-export const useSoundStore = create<{ enabled: boolean; toggle: () => void; resumeEffects: () => void; startMusic: () => void }>((set) => ({
-  // Music starts after entering the studio, unless the user mutes it.
+export const useSoundStore = create<{ enabled: boolean; toggle: () => void; resumeEffects: () => void }>((set) => ({
   enabled: true,
   resumeEffects: () => {},
-  startMusic: () => {},
   toggle: () => set((s) => ({ enabled: !s.enabled })),
 }));

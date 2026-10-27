@@ -1,5 +1,4 @@
 import BrandLogo from "../components/BrandLogo";
-import BackgroundMusic from "../components/BackgroundMusic";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 const ExperienceCanvas = lazy(() => import("../experience/ExperienceCanvas"));
 import { sections } from "../data/sections";
@@ -10,7 +9,6 @@ import Navigation from "../components/Navigation";
 import SoundToggle, { MediaSoundController } from "../components/SoundToggle";
 import FallbackResume from "../components/FallbackResume";
 import { useStudioStore } from "../navigation/useStudioStore";
-import { useSoundStore } from "../media/useSoundStore";
 import { SceneRecovery, type SceneStatus } from "../experience/sceneRecovery";
 import { useTourStore } from "../navigation/useTourStore";
 export default function App() {
@@ -31,7 +29,6 @@ export default function App() {
   return (
     <>
       <MediaSoundController />
-      <BackgroundMusic />
       {!failed && scene.phase !== "retrying" && (
         <Suspense fallback={null}>
           <ExperienceCanvas
@@ -138,7 +135,6 @@ export default function App() {
                 <button className="explore-button studio-enter" autoFocus
                   onClick={() => {
                     useStudioStore.getState().enterStudio();
-                    useSoundStore.getState().startMusic();
                   }}>
                   작업실 들어가기 <span aria-hidden="true">↗</span>
                 </button>
