@@ -7,10 +7,9 @@ import { Contact } from "../sections/ArchiveSections";
 import FrameContent from "../focus/FrameContent";
 import TourController from "../navigation/TourController";
 import Navigation from "../components/Navigation";
-import NarrationPlayer, { NarrationControls } from "../components/NarrationPlayer";
 import SoundToggle, { MediaSoundController } from "../components/SoundToggle";
 import FallbackResume from "../components/FallbackResume";
-import { useNarrationStore } from "../media/useNarrationStore";
+import { useStudioStore } from "../navigation/useStudioStore";
 import { useSoundStore } from "../media/useSoundStore";
 import { SceneRecovery, type SceneStatus } from "../experience/sceneRecovery";
 import { useTourStore } from "../navigation/useTourStore";
@@ -22,7 +21,7 @@ export default function App() {
   const showFallback = fallback || failed;
   useEffect(() => { recovery.start(); return () => recovery.dispose(); }, [recovery]);
   const s = useTourStore();
-  const entered = useNarrationStore((state) => state.entered);
+  const entered = useStudioStore((state) => state.entered);
   const openingButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (entered) openingButton.current?.focus({ preventScroll: true });
@@ -33,7 +32,6 @@ export default function App() {
     <>
       <MediaSoundController />
       <BackgroundMusic />
-      <NarrationPlayer suspended={showFallback} />
       {!failed && scene.phase !== "retrying" && (
         <Suspense fallback={null}>
           <ExperienceCanvas
@@ -75,7 +73,6 @@ export default function App() {
               INTERACTIVE ARCHIVE
             </span>
             <div className="header-actions">
-              {!focused && <NarrationControls />}
               {!focused && <SoundToggle />}
               <button
                 onClick={() => setFallback(true)}
@@ -140,7 +137,7 @@ export default function App() {
               {s.ready ? (
                 <button className="explore-button studio-enter" autoFocus
                   onClick={() => {
-                    useNarrationStore.getState().enterStudio();
+                    useStudioStore.getState().enterStudio();
                     useSoundStore.getState().startMusic();
                   }}>
                   작업실 들어가기 <span aria-hidden="true">↗</span>

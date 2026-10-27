@@ -171,7 +171,8 @@ button:focus-visible, a:focus-visible, summary:focus-visible, [tabindex]:focus-v
   .frame-content.expanded { left: 2%; top: 2%; width: 96%; height: 96%; border-radius: 18px; }
   .content-scroll { padding: 28px 24px 40px; }
   .content-intro h2 { font-size: 34px; letter-spacing: -1px; }
-  .monitor-toolbar, .gallery-frame .monitor-toolbar { padding: 12px 14px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; }
+  .monitor-toolbar, .gallery-frame .monitor-toolbar { padding: 12px 14px; display: grid; grid-template-columns: 40px minmax(0, 1fr); }
+  .monitor-toolbar > button:last-child { justify-self: end; }
   .monitor-toolbar > span:first-child { grid-column: 1 / -1; font-size: 18px; }
   .monitor-toolbar .sound-button-compact { padding: 8px; min-width: 40px; }
   .monitor-toolbar .narration-control { padding: 10px 8px; gap: 6px; }

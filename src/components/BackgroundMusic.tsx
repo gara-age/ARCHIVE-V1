@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useNarrationStore } from "../media/useNarrationStore";
+import { useStudioStore } from "../navigation/useStudioStore";
 import { useSoundStore } from "../media/useSoundStore";
 import { assetUrl } from "../utils/assetUrl";
 
@@ -13,7 +13,7 @@ export default function BackgroundMusic() {
     let blocked = false;
     let disposed = false;
     const start = () => {
-      if (!useNarrationStore.getState().entered || disposed) return;
+      if (!useStudioStore.getState().entered || disposed) return;
       void node.play().then(() => { if (!disposed) blocked = false; })
         .catch(() => { if (!disposed) blocked = true; });
     };

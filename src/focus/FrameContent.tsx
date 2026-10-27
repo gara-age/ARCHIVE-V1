@@ -1,5 +1,4 @@
 import SoundToggle from "../components/SoundToggle";
-import { NarrationControls } from "../components/NarrationPlayer";
 import { useEffect, useRef } from "react";
 import { useTourStore } from "../navigation/useTourStore";
 import { sectionContent } from "../sections/ArchiveSections";
@@ -76,7 +75,6 @@ export default function FrameContent() {
             <span className="reader-section-number">{section.number}</span> {section.title}
           </span>
           <SoundToggle compact />
-          <NarrationControls />
           {expanded ? (
             <button
               ref={closeButton}

@@ -13,7 +13,7 @@ test('master sound OFF mutes both audio and video without pausing or resetting t
 test('newly mounted media inherit the same OFF preference', () => {
  const added=[{muted:false}];applyMediaSound(added,false);assert.equal(added[0].muted,true);
 });
-test('one shared sound preference toggles globally and starts ON for the entry narration', () => {
+test('one shared sound preference toggles globally and starts ON for studio audio', () => {
  assert.equal(useSoundStore.getState().enabled,true);
  useSoundStore.getState().toggle();assert.equal(useSoundStore.getState().enabled,false);
  useSoundStore.getState().toggle();assert.equal(useSoundStore.getState().enabled,true);

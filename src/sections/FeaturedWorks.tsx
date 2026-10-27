@@ -1,4 +1,3 @@
-import { useNarrationStore } from "../media/useNarrationStore";
 import { useEffect, useId, useState } from "react";
 import { projectStories } from "../data/projectStories";
 import { projects } from "../data/projects";
@@ -12,7 +11,6 @@ export default function FeaturedWorks() {
   const instance = useId();
   const project = projects[selected];
   useEffect(() => {
-    useNarrationStore.setState({ projectId: project.id });
     setOpenDemo(null);
   }, [project.id]);
   const story = projectStories[project.id];
